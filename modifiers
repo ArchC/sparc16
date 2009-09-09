@@ -1,4 +1,8 @@
 
+/////
+///// Modifiers for SPARCV8
+/////
+
 //ac_modifier_encode(low)
 //{
 //  reloc->Type_F3B.simm13 = reloc->input & 0x3FF;
@@ -36,14 +40,81 @@
 /////
 
 /// PCREL16
-ac_modifier_encode(pcrelsixteen)
+ac_modifier_encode(pcrelst)
 {
   // The address is aligned on 2 bytes boundary
   reloc->output = (reloc->input - reloc->address) >> 1;
 }
 
-ac_modifier_decode(pcrelsixteen)
+ac_modifier_decode(pcrelst)
 {
   reloc->output = (reloc->input << 1) + reloc->address;
 }
 
+/// EIMM
+ac_modifier_encode(eimm)
+{
+  reloc->Type_EXT_RI.immext = reloc->input & 0x7ff;
+  reloc->Type_EXT_RI.imm8 = reloc->input >> 11;
+}
+
+ac_modifier_decode(eimm)
+{
+  reloc->output = reloc->input;
+}
+
+/// EIMMRRI
+ac_modifier_encode(eimmrri)
+{
+  reloc->Type_EXT_RRI.immext = reloc->input & 0x7ff;
+  reloc->Type_EXT_RRI.imm5 = reloc->input >> 11;
+}
+
+ac_modifier_decode(eimmrri)
+{
+  reloc->output = reloc->input;
+}
+
+/// HIGH16
+ac_modifier_encode(highst)
+{
+  reloc->Type_RI.imm8 = reloc->input >> 24;
+}
+
+ac_modifier_decode(highst)
+{
+}
+
+/// EHIGH16
+ac_modifier_encode(ehighst)
+{
+  unsigned int imm21 = reloc->input >> 11;
+  reloc->Type_EXT_RI.immext = imm21 & 0x7ff;
+  reloc->Type_EXT_RI.imm8 = (imm21 >> 11);
+}
+
+ac_modifier_decode(ehighst)
+{
+}
+
+/// LOW16
+ac_modifier_encode(lowst)
+{
+  reloc->Type_RRI.imm5 = reloc->input & 0x1f;
+}
+
+ac_modifier_decode(lowst)
+{
+}
+
+/// ELOW16
+ac_modifier_encode(elowst)
+{
+  unsigned int input = reloc->input & 0xffff;
+  reloc->Type_EXT_RRI.immext = input & 0x7ff;
+  reloc->Type_EXT_RRI.imm5 = input >> 11;
+}
+
+ac_modifier_decode(elowst)
+{
+}
