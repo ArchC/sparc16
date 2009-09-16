@@ -1,3 +1,4 @@
+# TODO: esethi support for %gdop_hix22/lowx10
 
 loop:
   cmp16 %g0, 0xff
@@ -11,5 +12,6 @@ loop:
   mov16 0xff, %g0
   mov16 -1, %g0
   emov16 0x7ffff, %g0
+  esethi16 %hi(0x7ffff000), %g0
   esethi16 loop+3, %g0 
   esethi16 %hi(loop), %g0

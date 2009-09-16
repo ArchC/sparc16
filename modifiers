@@ -55,7 +55,7 @@ ac_modifier_decode(pcreli)
 ac_modifier_encode(immextri)
 {
   reloc->Type_EXT_RI.immext = reloc->input & 0x7ff;
-  reloc->Type_EXT_RI.imm8 = reloc->input >> 11;
+  reloc->Type_EXT_RI.simm8 = reloc->input >> 11;
 }
 
 ac_modifier_decode(immextri)
@@ -86,7 +86,7 @@ ac_modifier_decode(immextris)
 ac_modifier_encode(immextrri)
 {
   reloc->Type_EXT_RRI.immext = reloc->input & 0x7ff;
-  reloc->Type_EXT_RRI.imm5 = reloc->input >> 11;
+  reloc->Type_EXT_RRI.simm5 = reloc->input >> 11;
 }
 
 ac_modifier_decode(immextrri)
@@ -105,6 +105,8 @@ ac_modifier_encode(highri)
 
 ac_modifier_decode(highri)
 {
+  unsigned int insn = (unsigned)reloc->addend;
+  reloc->output = (insn >> 3) & 0xff;
 }
 
 /// %hi handling for Type_EXT_RI
@@ -117,16 +119,22 @@ ac_modifier_encode(highextri)
 
 ac_modifier_decode(highextri)
 {
+  unsigned int insn = (unsigned)reloc->addend;
+  unsigned int hi = ((insn >> 3) & 0xff) << 11;
+  unsigned int low = ((insn >> 16) & 0x7ff);
+  reloc->output = hi | low;
 }
 
 /// %lo handling for Type_RRI
 ac_modifier_encode(lowrri)
 {
-  reloc->Type_RRI.imm5 = reloc->input & 0x1f;
+  reloc->Type_RRI.simm5 = reloc->input & 0x1f;
 }
 
 ac_modifier_decode(lowrri)
 {
+  unsigned int insn = (unsigned)reloc->addend;
+  reloc->output = (insn >> 6) & 0x1f;
 }
 
 /// %lo handling for Type_EXT_RRI
@@ -134,9 +142,71 @@ ac_modifier_encode(lowextrri)
 {
   unsigned int input = reloc->input & 0xffff;
   reloc->Type_EXT_RRI.immext = input & 0x7ff;
-  reloc->Type_EXT_RRI.imm5 = input >> 11;
+  reloc->Type_EXT_RRI.simm5 = input >> 11;
 }
 
 ac_modifier_decode(lowextrri)
 {
+  unsigned int insn = (unsigned)reloc->addend;
+  unsigned int hi = ((insn >> 6) & 0x1f) << 11;
+  unsigned int low = ((insn >> 16) & 0x7ff);
+  reloc->output = hi | low;
+}
+
+/// Immediate handling for Type_I2
+ac_modifier_encode(immextii)
+{
+  reloc->Type_EXT_I2.immext = reloc->input & 0x7ff;
+  reloc->Type_EXT_I2.simm9 = reloc->input >> 11;
+}
+
+ac_modifier_decode(immextii)
+{
+  unsigned int insn = (unsigned)reloc->addend;
+  unsigned int hi = (insn & 0x1ff) << 11;
+  unsigned int low = ((insn >> 16) & 0x7ff);
+  reloc->output = hi | low;
+}
+
+/// Immediate handling for Type_EXT_RI2
+ac_modifier_encode(immextriri)
+{
+  reloc->Type_EXT_RRI.immext = reloc->input & 0x7ff;
+  reloc->Type_EXT_RRI.simm6 = reloc->input >> 11;
+}
+
+ac_modifier_decode(immextriri)
+{
+  unsigned int insn = (unsigned)reloc->addend;
+  unsigned int hi = ((insn >> 3) & 0x3f) << 11;
+  unsigned int low = ((insn >> 16) & 0x7ff);
+  reloc->output = hi | low;
+}
+
+/// %lo handling for Type_RI2
+ac_modifier_encode(lowrri)
+{
+  reloc->Type_RRI.simm6 = reloc->input & 0x3f;
+}
+
+ac_modifier_decode(lowrri)
+{
+  unsigned int insn = (unsigned)reloc->addend;
+  reloc->output = (insn >> 3) & 0x3f;
+}
+
+/// %lo handling for Type_EXT_RI2
+ac_modifier_encode(lowextrri)
+{
+  unsigned int input = reloc->input & 0xffff;
+  reloc->Type_EXT_RRI.immext = input & 0x7ff;
+  reloc->Type_EXT_RRI.simm6 = input >> 11;
+}
+
+ac_modifier_decode(lowextrri)
+{
+  unsigned int insn = (unsigned)reloc->addend;
+  unsigned int hi = ((insn >> 3) & 0x3f) << 11;
+  unsigned int low = ((insn >> 16) & 0x7ff);
+  reloc->output = hi | low;
 }
