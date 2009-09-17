@@ -1,7 +1,7 @@
 
 loop:
-  movra %g0, %g1
-  movrb %g1, %g0
+  movra %r1, %r2
+  movrb %r3, %r4
   savesp -256
   savesp -1
   savesp 255
