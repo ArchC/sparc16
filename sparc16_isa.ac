@@ -547,24 +547,24 @@ AC_ISA(sparc16){
     e_subx_reg16.set_decoder(opext=0x0b, op=0xa, op2=0xC);
 
     btst_reg16.set_asm("btst16 %reg, %reg", rs, rd);
-    btst_reg16.set_decoder(op=0xa, op2=0x1);
+    btst_reg16.set_decoder(op=0xa, op2=0x18);
     //e_btst_reg16.set_asm("ebtst16 %reg, %reg, %reg", rs, rsext, rd);
-    //e_btst_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x1);
+    //e_btst_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x18);
 
     clrw16.set_asm("clrw [%reg + %reg]", rs, rd);
-    clrw16.set_decoder(op=0xa, op2=0x7);
+    clrw16.set_decoder(op=0xa, op2=0x1a);
     //e_clrw16.set_asm("eclrw [%reg + %reg + %reg]", rs, rsext, rd);
-    //e_clrw16.set_decoder(opext=0x0b, op=0xa, op2=0x7);
+    //e_clrw16.set_decoder(opext=0x0b, op=0xa, op2=0x1a);
 
     clrb16.set_asm("clrb16 [%reg + %reg]", rs, rd);
-    clrb16.set_decoder(op=0xa, op2=0x5);
+    clrb16.set_decoder(op=0xa, op2=0x1f);
     //e_clrb16.set_asm("eclrb16 [%reg + %reg + %reg]", rs, rsext, rd);
-    //e_clrb16.set_decoder(opext=0x0b, op=0xa, op2=0x5);
+    //e_clrb16.set_decoder(opext=0x0b, op=0xa, op2=0x1f);
 
     clrh16.set_asm("clrh16 [%reg + %reg]", rs, rd);
-    clrh16.set_decoder(op=0xa, op2=0x6);
+    clrh16.set_decoder(op=0xa, op2=0x1e);
     //e_clrh16.set_asm("eclrh16 [%reg + %reg + %reg]", rs, rsext, rd);
-    //e_clrh16.set_decoder(opext=0x0b, op=0xa, op2=0x6);
+    //e_clrh16.set_decoder(opext=0x0b, op=0xa, op2=0x1e);
 
     cmp_reg16.set_asm("cmp16 %reg, %reg", rs, rd);
     cmp_reg16.set_decoder(op=0xa, op2=0x14);
@@ -582,9 +582,9 @@ AC_ISA(sparc16){
     e_sth_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x6);
 
     std_reg16.set_asm("std16 %reg, [%reg]", rd, rs);
-    std_reg16.set_decoder(op=0xa, op2=0xF);
+    std_reg16.set_decoder(op=0xa, op2=0x7);
     e_std_reg16.set_asm("estd16 %reg, [%reg + %reg]", rd, rsext, rs);
-    e_std_reg16.set_decoder(opext=0x0b, op=0xa, op2=0xF);
+    e_std_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x7);
 
     lduh_reg16.set_asm("lduh16 [%reg], %reg", rs, rd);
     lduh_reg16.set_decoder(op=0xa, op2=0x2);
@@ -627,14 +627,14 @@ AC_ISA(sparc16){
     e_sll_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x15);
 
     orn_reg16.set_asm("orn16 %reg, %reg", rs, rd);
-    orn_reg16.set_decoder(op=0xa, op2=0x2);
+    orn_reg16.set_decoder(op=0xa, op2=0x1c);
     e_orn_reg16.set_asm("eorn16 %reg, %reg, %reg", rs, rsext, rd);
-    e_orn_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x2);
+    e_orn_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x1c);
 
     xnor_reg16.set_asm("xnor16 %reg, %reg", rs, rd);
-    xnor_reg16.set_decoder(op=0xa, op2=0x1);
+    xnor_reg16.set_decoder(op=0xa, op2=0x1b);
     e_xnor_reg16.set_asm("exnor16 %reg, %reg, %reg", rs, rsext, rd);
-    e_xnor_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x1);
+    e_xnor_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x1b);
 
     andn_reg16.set_asm("andn16 %reg, %reg", rs, rd);
     andn_reg16.set_decoder(op=0xa, op2=0xD);
