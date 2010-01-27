@@ -70,3 +70,14 @@
 
     restore16 %r0, %r2
     erestore16 %r0, %r1, %r2
+
+    rd16 %wim, %r0
+    rd16 %y, %r0
+    rd16 %psr, %r0
+    rd16 %tbr, %r0
+
+    wr16 %wim, %r0
+    wr16 %y, %r0
+    wr16 %psr, %r0
+    wr16 %tbr, %r0
+
