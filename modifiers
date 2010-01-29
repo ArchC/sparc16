@@ -39,7 +39,7 @@
 ///// Modifiers for SPARC16
 /////
 
-/// pcrel handling for Type_I
+/// pcrel handling for Type_I and Type_XCHG
 ac_modifier_encode(pcreli)
 {
   // The address is aligned on 2 bytes boundary
