@@ -1,6 +1,7 @@
 #!/bin/sh
 
-ARCH_SRC="archc-revolutions-cardoso"
+ARCH_SRC="/p/archc-tools/archc-revolutions-cardoso"
+#ARCH_SRC="/p/archc-tools/archc-newbingen-branch"
 sudo rm -rf /usr/local/archc && sudo mkdir -p /usr/local/archc
 
 gmake clean 2>/dev/null

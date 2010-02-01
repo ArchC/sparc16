@@ -63,3 +63,5 @@ loop:
   ebcc16,a loop
   ebpos16,a loop
   ebvc16,a loop
+
+  sparc16bx loop

@@ -81,3 +81,9 @@
     wr16 %psr, %r0
     wr16 %tbr, %r0
 
+    callr %r0
+    jmpr %r0
+    ret
+    retl
+    trestore
+    nop

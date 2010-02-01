@@ -115,9 +115,10 @@ AC_ISA(sparc16){
   ac_instr<Type_EXT_RRI> e_add16, e_and16, e_ld16, e_st16, e_ldd16, e_std16, e_sra16, e_srl16, e_sll16;
 
   ac_instr<Type_I2> mov8to3216, mov32to816, savesp16, bn16, bg16, ble16, bge16, bl16, bgu16, 
-                    bleu16, bcc16, bcs16, bpos16, bneg16, bvc16, bvs16;
+                    bleu16, bcc16, bcs16, bpos16, bneg16, bvc16, bvs16, sparc16bx;
   ac_instr<Type_EXT_I2> e_mov8to3216, e_mov32to816, e_savesp16, e_bn16, e_bg16, e_ble16, e_bge16, 
-                    e_bl16, e_bgu16, e_bleu16, e_bcc16, e_bcs16, e_bpos16, e_bneg16, e_bvc16, e_bvs16;
+                    e_bl16, e_bgu16, e_bleu16, e_bcc16, e_bcs16, e_bpos16, e_bneg16, e_bvc16, e_bvs16,
+                    e_sparc16bx;
 
   ac_instr<Type_RI2> addfp, stfp, ldfp, addsp, stsp, ldsp, btst16, clrw_imm16;
   ac_instr<Type_EXT_RI2> e_addfp, e_stfp, e_ldfp, e_addsp, e_stsp, e_ldsp, e_btst16, e_clrw_imm16;
@@ -130,7 +131,7 @@ AC_ISA(sparc16){
   ac_instr<Type_RR> addx_reg16, subx_reg16, btst_reg16, clrw16, clrb16, clrh16, cmp_reg16, 
                     stb_reg16, sth_reg16, std_reg16, lduh_reg16, ldub_reg16, ldd_reg16, ldsb_reg16, 
                     ldsh_reg16, sra_reg16, srl_reg16, sll_reg16, orn_reg16, xnor_reg16, 
-                    andn_reg16, neg_reg16, restore16, rd16, wr16;
+                    andn_reg16, neg_reg16, restore16, rd16, wr16, callr, jmpr, ret, retl, trestore, nop;
   ac_instr<Type_EXT_RR> e_addx_reg16, e_subx_reg16, e_btst_reg16, e_clrw16, e_clrb16, e_clrh16, 
                     e_cmp_reg16, e_stb_reg16, e_sth_reg16, e_std_reg16, e_lduh_reg16, e_ldub_reg16, 
                     e_ldd_reg16, e_ldsb_reg16, e_ldsh_reg16, e_sra_reg16, e_srl_reg16, e_sll_reg16, 
@@ -310,6 +311,11 @@ AC_ISA(sparc16){
     savesp16.set_decoder(op=0x1c, op3=0x1);
     e_savesp16.set_asm("esavesp %imm(immextii)", simm9+immext);
     e_savesp16.set_decoder(opext=0x0b, op=0x1c, op3=0x1);
+
+    sparc16bx.set_asm("sparc16bx %exp(pcreli)", simm9);
+    sparc16bx.set_decoder(op=0x1e, op3=0x1);
+    e_sparc16bx.set_asm("esparc16bx %exp(pcreli)", simm9+immext);
+    e_sparc16bx.set_decoder(opext=0x0b, op=0x1e, op3=0x1);
 
     bn16.set_asm("bn16%[anul] %exp(pcreli)", an, simm8);
     bn16.set_decoder(op=0x1c, cond=0x0);
@@ -672,6 +678,24 @@ AC_ISA(sparc16){
     rd16.set_decoder(op=0xa, op2=0xf);
     wr16.set_asm("wr16 %prv_reg, %reg", rs, rd);
     wr16.set_decoder(op=0xa, op2=0xe);
+
+    callr.set_asm("callr %reg", rd);
+    callr.set_decoder(op=0xa, op2=0x1f, rs=0x0);
+
+    jmpr.set_asm("jmpr %reg", rd);
+    jmpr.set_decoder(op=0xa, op2=0x1f, rs=0x1);
+
+    ret.set_asm("ret");
+    ret.set_decoder(op=0xa, op2=0x1f, rs=0x2);
+
+    retl.set_asm("retl");
+    retl.set_decoder(op=0xa, op2=0x1f, rs=0x3);
+
+    trestore.set_asm("trestore");
+    trestore.set_decoder(op=0xa, op2=0x1f, rs=0x4);
+
+    nop.set_asm("nop");
+    nop.set_decoder(op=0xa, op2=0x1f, rs=0x5);
 
     /// Format RRR
     add_reg16.set_asm("add16 %reg, %reg, %reg", rs1, rs2, rd);
