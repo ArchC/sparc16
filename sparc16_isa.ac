@@ -43,7 +43,7 @@ AC_ISA(sparc16){
   /* SPARCv8 Formats */
  
   //ac_format Type_F1   = "%op:2 %disp30:30";
-  //ac_format Type_F2A 	= "%op:2 %rd:5 %op2:3 %imm22:22";
+  ac_format Type_F2A 	= "%op:2 %rd:5 %op2:3 %imm22:22";
   //ac_format Type_F2B 	= "%op:2 %an:1 %cond:4 %op2:3 %disp22:22:s";
   //ac_format Type_F3A 	= "%op:2 %rd:5 %op3:6 %rs1:5 %is:1 %asi:8 %rs2:5";
   //ac_format Type_F3B 	= "%op:2 %rd:5 %op3:6 %rs1:5 %is:1 %simm13:13:s";
@@ -52,6 +52,8 @@ AC_ISA(sparc16){
 
   //ac_instr<Type_F1>  call;
   //ac_instr<Type_F2A> nop, sethi;
+  ac_instr<Type_F2A> nop32;
+
   //ac_instr<Type_F2B> ba, bn, bne, be, bg, ble, bge, bl, bgu, bleu, bcc, bcs,
   //                   bpos, bneg, bvc, bvs;
 
@@ -192,8 +194,13 @@ AC_ISA(sparc16){
     /// SPARC16 Encoding and asm patterns
     
     /// Format XCHG
-    sparcv8bx.set_asm("sparcv8bx %exp(pcreli)", disp19);
+    sparcv8bx.set_asm("sparcv8bx %exp(pcrelx)", disp19);
     sparcv8bx.set_decoder(op=0x2, op3=0x19);
+
+    /// SPARCv8 NOP
+    nop32.set_asm("nop32");
+    nop32.set_decoder(op=0x00, op2=0x04, imm22=0x0, rd=0x0);
+
 
     /// Format I and EXT_I
     b16.set_asm("b16 %exp(pcreli)", simm11);

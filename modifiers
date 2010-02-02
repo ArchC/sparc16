@@ -40,6 +40,20 @@
 /////
 
 /// pcrel handling for Type_I and Type_XCHG
+ac_modifier_encode(pcrelx)
+{
+  // The address is aligned on 2 bytes boundary
+  reloc->output = (reloc->input - reloc->address) >> 2;
+}
+
+
+ac_modifier_decode(pcrelx)
+{
+  reloc->output = (reloc->input << 2) + reloc->address;
+}
+
+
+/// pcrel handling for Type_I and Type_XCHG
 ac_modifier_encode(pcreli)
 {
   // The address is aligned on 2 bytes boundary
