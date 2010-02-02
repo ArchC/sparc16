@@ -580,7 +580,7 @@ AC_ISA(sparc16){
     //e_clrw16.set_decoder(opext=0x0b, op=0xa, op2=0x1a);
 
     clrb16.set_asm("clrb16 [%reg + %reg]", rs, rd);
-    clrb16.set_decoder(op=0xa, op2=0x1f);
+    clrb16.set_decoder(op=0xa, op2=0x8);
     //e_clrb16.set_asm("eclrb16 [%reg + %reg + %reg]", rs, rsext, rd);
     //e_clrb16.set_decoder(opext=0x0b, op=0xa, op2=0x1f);
 
