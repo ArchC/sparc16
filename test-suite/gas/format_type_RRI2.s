@@ -1,54 +1,54 @@
 
 constant:
-  addx16 %r0, -1, %r1
-  addx16 %r0, %lo(0xeeff), %r1
-  eaddx16 %r0, -1, %r1
-  eaddx16 %r0, %lo(0xeeeffff), %r1
+  addx16 %i0, -1, %i1
+  addx16 %i0, %lo(0xeeff), %i1
+  eaddx16 %i0, -1, %i1
+  eaddx16 %i0, %lo(0xeeeffff), %i1
 
-  subx16 %r0, -1, %r1
-  subx16 %r0, %lo(0xeeff), %r1
-  esubx16 %r0, -1, %r1
-  esubx16 %r0, %lo(0xeeeffff), %r1
+  subx16 %i0, -1, %i1
+  subx16 %i0, %lo(0xeeff), %i1
+  esubx16 %i0, -1, %i1
+  esubx16 %i0, %lo(0xeeeffff), %i1
 
-  smul16 %r0, -1, %r1
-  smul16 %r0, %lo(0xeeff), %r1
-  esmul16 %r0, -1, %r1
-  esmul16 %r0, %lo(0xeeeffff), %r1
+  smul16 %i0, -1, %i1
+  smul16 %i0, %lo(0xeeff), %i1
+  esmul16 %i0, -1, %i1
+  esmul16 %i0, %lo(0xeeeffff), %i1
 
-  umul16 %r0, -1, %r1
-  umul16 %r0, %lo(0xeeff), %r1
-  eumul16 %r0, -1, %r1
-  eumul16 %r0, %lo(0xeeeffff), %r1
+  umul16 %i0, -1, %i1
+  umul16 %i0, %lo(0xeeff), %i1
+  eumul16 %i0, -1, %i1
+  eumul16 %i0, %lo(0xeeeffff), %i1
 
-  sdiv16 %r0, -1, %r1
-  sdiv16 %r0, %lo(0xeeff), %r1
-  esdiv16 %r0, -1, %r1
-  esdiv16 %r0, %lo(0xeeeffff), %r1
+  sdiv16 %i0, -1, %i1
+  sdiv16 %i0, %lo(0xeeff), %i1
+  esdiv16 %i0, -1, %i1
+  esdiv16 %i0, %lo(0xeeeffff), %i1
 
-  udiv16 %r0, -1, %r1
-  udiv16 %r0, %lo(0xeeff), %r1
-  eudiv16 %r0, -1, %r1
-  eudiv16 %r0, %lo(0xeeeffff), %r1
+  udiv16 %i0, -1, %i1
+  udiv16 %i0, %lo(0xeeff), %i1
+  eudiv16 %i0, -1, %i1
+  eudiv16 %i0, %lo(0xeeeffff), %i1
 
-  or16 %r0, -1, %r1
-  or16 %r0, %lo(0xeeff), %r1
-  eor16 %r0, -1, %r1
-  eor16 %r0, %lo(0xeeeffff), %r1
+  oi16 %i0, -1, %i1
+  oi16 %i0, %lo(0xeeff), %i1
+  eoi16 %i0, -1, %i1
+  eoi16 %i0, %lo(0xeeeffff), %i1
 
-  xor16 %r0, -1, %r1
-  xor16 %r0, %lo(0xeeff), %r1
-  exor16 %r0, -1, %r1
-  exor16 %r0, %lo(0xeeeffff), %r1
+  xoi16 %i0, -1, %i1
+  xoi16 %i0, %lo(0xeeff), %i1
+  exoi16 %i0, -1, %i1
+  exoi16 %i0, %lo(0xeeeffff), %i1
 
-  orn16 %r0, -1, %r1
-  orn16 %r0, %lo(0xeeff), %r1
-  eorn16 %r0, -1, %r1
-  eorn16 %r0, %lo(0xeeeffff), %r1
+  orn16 %i0, -1, %i1
+  orn16 %i0, %lo(0xeeff), %i1
+  eorn16 %i0, -1, %i1
+  eorn16 %i0, %lo(0xeeeffff), %i1
 
-  xnor16 %r0, -1, %r1
-  xnor16 %r0, %lo(0xeeff), %r1
-  exnor16 %r0, -1, %r1
-  exnor16 %r0, %lo(0xeeeffff), %r1
+  xnoi16 %i0, -1, %i1
+  xnoi16 %i0, %lo(0xeeff), %i1
+  exnoi16 %i0, -1, %i1
+  exnoi16 %i0, %lo(0xeeeffff), %i1
 
   ## load and store
   ldsh16 [%g0 + -1], %g1 

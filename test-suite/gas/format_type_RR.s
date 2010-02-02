@@ -2,87 +2,87 @@
 # make sense, but they have an opcode reserved for them on 
 # sparc16_isa.ac
 
-    addx16 %r0, %r2
-    eaddx16 %r0, %r1, %r2
+    addx16 %i0, %i2
+    eaddx16 %i0, %i1, %i2
 
-    subx16 %r0, %r2
-    esubx16 %r0, %r1, %r2
+    subx16 %i0, %i2
+    esubx16 %i0, %i1, %i2
 
-    btst16 %r0, %r2
-    #ebtst16 %r0, %r1, %r2
+    btst16 %i0, %i2
+    #ebtst16 %i0, %i1, %i2
 
-    clrw [%r0 + %r2]
-    #eclrw [%r0 + %r1 + %r2]
+    clrw [%i0 + %i2]
+    #eclrw [%i0 + %i1 + %i2]
 
-    clrb16 [%r0 + %r2]
-    #eclrb16 [%r0 + %r1 + %r2]
+    clrb16 [%i0 + %i2]
+    #eclrb16 [%i0 + %i1 + %i2]
 
-    clrh16 [%r0 + %r2]
-    #eclrh16 [%r0 + %r1 + %r2]
+    clrh16 [%i0 + %i2]
+    #eclrh16 [%i0 + %i1 + %i2]
 
-    cmp16 %r0, %r2
-    #ecmp16 %r0, %r1, %r2
+    cmp16 %i0, %i2
+    #ecmp16 %i0, %i1, %i2
 
-    stb16 %r2, [%r0]
-    estb16 %r2, [%r0+%r1]
+    stb16 %i2, [%i0]
+    estb16 %i2, [%i0+%i1]
 
-    sth16 %r2, [%r0]
-    esth16 %r2, [%r0+%r1]
+    sth16 %i2, [%i0]
+    esth16 %i2, [%i0+%i1]
 
-    std16 %r2, [%r0]
-    estd16 %r2, [%r0+%r1]
+    std16 %i2, [%i0]
+    estd16 %i2, [%i0+%i1]
 
-    lduh16 [%r0], %r2
-    elduh16 [%r0+%r1], %r2
+    lduh16 [%i0], %i2
+    elduh16 [%i0+%i1], %i2
 
-    ldub16 [%r0], %r2
-    eldub16 [%r0+%r1], %r2
+    ldub16 [%i0], %i2
+    eldub16 [%i0+%i1], %i2
 
-    ldd16 [%r0], %r2
-    eldd16 [%r0+%r1], %r2
+    ldd16 [%i0], %i2
+    eldd16 [%i0+%i1], %i2
 
-    ldsb16 [%r0], %r2
-    eldsb16 [%r0+%r1], %r2
+    ldsb16 [%i0], %i2
+    eldsb16 [%i0+%i1], %i2
 
-    ldsh16 [%r0], %r2
-    eldsh16 [%r0+%r1], %r2
+    ldsh16 [%i0], %i2
+    eldsh16 [%i0+%i1], %i2
 
-    sra16 %r0, %r2
-    esra16 %r0, %r1, %r2
+    sra16 %i0, %i2
+    esra16 %i0, %i1, %i2
 
-    srl16 %r0, %r2
-    esrl16 %r0, %r1, %r2
+    srl16 %i0, %i2
+    esrl16 %i0, %i1, %i2
 
-    sll16 %r0, %r2
-    esll16 %r0, %r1, %r2
+    sll16 %i0, %i2
+    esll16 %i0, %i1, %i2
 
-    orn16 %r0, %r2
-    eorn16 %r0, %r1, %r2
+    orn16 %i0, %i2
+    eorn16 %i0, %i1, %i2
 
-    xnor16 %r0, %r2
-    exnor16 %r0, %r1, %r2
+    xnoi16 %i0, %i2
+    exnoi16 %i0, %i1, %i2
 
-    andn16 %r0, %r2
-    eandn16 %r0, %r1, %r2
+    andn16 %i0, %i2
+    eandn16 %i0, %i1, %i2
 
-    neg16 %r0, %r2
-    eneg16 %r0, %r1, %r2
+    neg16 %i0, %i2
+    eneg16 %i0, %i1, %i2
 
-    restore16 %r0, %r2
-    erestore16 %r0, %r1, %r2
+    restore16 %i0, %i2
+    erestore16 %i0, %i1, %i2
 
-    rd16 %wim, %r0
-    rd16 %y, %r0
-    rd16 %psr, %r0
-    rd16 %tbr, %r0
+    rd16 %wim, %i0
+    rd16 %y, %i0
+    rd16 %psr, %i0
+    rd16 %tbr, %i0
 
-    wr16 %wim, %r0
-    wr16 %y, %r0
-    wr16 %psr, %r0
-    wr16 %tbr, %r0
+    wi16 %wim, %i0
+    wi16 %y, %i0
+    wi16 %psr, %i0
+    wi16 %tbr, %i0
 
-    callr %r0
-    jmpr %r0
+    callr %i0
+    jmpr %i0
     ret
     retl
     trestore
