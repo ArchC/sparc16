@@ -30,65 +30,65 @@ constant:
   eudiv16 %i0, -1, %i1
   eudiv16 %i0, %lo(0xeeeffff), %i1
 
-  oi16 %i0, -1, %i1
-  oi16 %i0, %lo(0xeeff), %i1
-  eoi16 %i0, -1, %i1
-  eoi16 %i0, %lo(0xeeeffff), %i1
+  or16 %i0, -1, %i1
+  or16 %i0, %lo(0xeeff), %i1
+  eor16 %i0, -1, %i1
+  eor16 %i0, %lo(0xeeeffff), %i1
 
-  xoi16 %i0, -1, %i1
-  xoi16 %i0, %lo(0xeeff), %i1
-  exoi16 %i0, -1, %i1
-  exoi16 %i0, %lo(0xeeeffff), %i1
+  xor16 %i0, -1, %i1
+  xor16 %i0, %lo(0xeeff), %i1
+  exor16 %i0, -1, %i1
+  exor16 %i0, %lo(0xeeeffff), %i1
 
   orn16 %i0, -1, %i1
   orn16 %i0, %lo(0xeeff), %i1
   eorn16 %i0, -1, %i1
   eorn16 %i0, %lo(0xeeeffff), %i1
 
-  xnoi16 %i0, -1, %i1
-  xnoi16 %i0, %lo(0xeeff), %i1
-  exnoi16 %i0, -1, %i1
-  exnoi16 %i0, %lo(0xeeeffff), %i1
+  xnor16 %i0, -1, %i1
+  xnor16 %i0, %lo(0xeeff), %i1
+  exnor16 %i0, -1, %i1
+  exnor16 %i0, %lo(0xeeeffff), %i1
 
   ## load and store
-  ldsh16 [%g0 + -1], %g1 
-  ldsh16 [-1 + %g0], %g1 
-  ldsh16 [%g0 + %lo(0xffff)], %g1
-  eldsh16 [%g0 + -1], %g1 
-  eldsh16 [-1 + %g0], %g1 
-  eldsh16 [%g0 + %lo(0xffffeeee)], %g1
+  ldsh16 [%i0 + -1], %g1 
+  ldsh16 [-1 + %i0], %g1 
+  ldsh16 [%i0 + %lo(0xffff)], %g1
+  eldsh16 [%i0 + -1], %g1 
+  eldsh16 [-1 + %i0], %g1 
+  eldsh16 [%i0 + %lo(0xffffeeee)], %g1
 
-  lduh16 [%g0 + -1], %g1 
-  lduh16 [-1 + %g0], %g1 
-  lduh16 [%g0 + %lo(0xffff)], %g1
-  elduh16 [%g0 + -1], %g1 
-  elduh16 [-1 + %g0], %g1 
-  elduh16 [%g0 + %lo(0xffffeeee)], %g1
+  lduh16 [%i0 + -1], %g1 
+  lduh16 [-1 + %i0], %g1 
+  lduh16 [%i0 + %lo(0xffff)], %g1
+  elduh16 [%i0 + -1], %g1 
+  elduh16 [-1 + %i0], %g1 
+  elduh16 [%i0 + %lo(0xffffeeee)], %g1
 
-  ldsb16 [%g0 + -1], %g1 
-  ldsb16 [-1 + %g0], %g1 
-  ldsb16 [%g0 + %lo(0xffff)], %g1
-  eldsb16 [%g0 + -1], %g1 
-  eldsb16 [-1 + %g0], %g1 
-  eldsb16 [%g0 + %lo(0xffffeeee)], %g1
+  ldsb16 [%i0 + -1], %g1 
+  ldsb16 [-1 + %i0], %g1 
+  ldsb16 [%i0 + %lo(0xffff)], %g1
+  eldsb16 [%i0 + -1], %g1 
+  eldsb16 [-1 + %i0], %g1 
+  eldsb16 [%i0 + %lo(0xffffeeee)], %g1
 
-  ldub16 [%g0 + -1], %g1 
-  ldub16 [-1 + %g0], %g1 
-  ldub16 [%g0 + %lo(0xffff)], %g1
-  eldub16 [%g0 + -1], %g1 
-  eldub16 [-1 + %g0], %g1 
-  eldub16 [%g0 + %lo(0xffffeeee)], %g1
+  ldub16 [%i0 + -1], %g1 
+  ldub16 [-1 + %i0], %g1 
+  ldub16 [%i0 + %lo(0xffff)], %g1
+  eldub16 [%i0 + -1], %g1 
+  eldub16 [-1 + %i0], %g1 
+  eldub16 [%i0 + %lo(0xffffeeee)], %g1
 
-  stb16 %g1, [%g0 + -1]
-  stb16 %g1, [-1 + %g0]
-  stb16 %g1, [%g0 + %lo(0xffff)]
-  estb16 %g1, [%g0 + -1]
-  estb16 %g1, [-1 + %g0]
-  estb16 %g1, [%g0 + %lo(0xffffeeee)]
+  stb16 %g1, [%i0 + -1]
+  stb16 %g1, [-1 + %i0]
+  stb16 %g1, [%i0 + %lo(0xffff)]
+  estb16 %g1, [%i0 + -1]
+  estb16 %g1, [-1 + %i0]
+  estb16 %g1, [%i0 + %lo(0xffffeeee)]
 
-  sth16 %g1, [%g0 + -1]
-  sth16 %g1, [-1 + %g0]
-  sth16 %g1, [%g0 + %lo(0xffff)]
-  esth16 %g1, [%g0 + -1]
-  esth16 %g1, [-1 + %g0]
-  esth16 %g1, [%g0 + %lo(0xffffeeee)]
+  sth16 %g1, [%i0 + -1]
+  sth16 %g1, [-1 + %i0]
+  sth16 %g1, [%i0 + %lo(0xffff)]
+  esth16 %g1, [%i0 + -1]
+  esth16 %g1, [-1 + %i0]
+  esth16 %g1, [%i0 + %lo(0xffffeeee)]

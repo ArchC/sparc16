@@ -59,8 +59,8 @@
     orn16 %i0, %i2
     eorn16 %i0, %i1, %i2
 
-    xnoi16 %i0, %i2
-    exnoi16 %i0, %i1, %i2
+    xnor16 %i0, %i2
+    exnor16 %i0, %i1, %i2
 
     andn16 %i0, %i2
     eandn16 %i0, %i1, %i2
@@ -76,10 +76,10 @@
     rd16 %psr, %i0
     rd16 %tbr, %i0
 
-    wi16 %wim, %i0
-    wi16 %y, %i0
-    wi16 %psr, %i0
-    wi16 %tbr, %i0
+    wr16 %wim, %i0
+    wr16 %y, %i0
+    wr16 %psr, %i0
+    wr16 %tbr, %i0
 
     callr %i0
     jmpr %i0

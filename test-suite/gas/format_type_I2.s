@@ -36,32 +36,32 @@ loop:
   ebpos16 loop
   ebvc16 loop
 
-  # with annul
-  bn16,a loop
-  ble16,a loop
-  bl16,a loop
-  bleu16,a loop
-  bcs16,a loop
-  bneg16,a loop
-  bvs16,a loop
-  bg16,a loop
-  bge16,a loop
-  bgu16,a loop
-  bcc16,a loop
-  bpos16,a loop
-  bvc16,a loop
-  ebn16,a loop
-  eble16,a loop
-  ebl16,a loop
-  ebleu16,a loop
-  ebcs16,a loop
-  ebneg16,a loop
-  ebvs16,a loop
-  ebg16,a loop
-  ebge16,a loop
-  ebgu16,a loop
-  ebcc16,a loop
-  ebpos16,a loop
-  ebvc16,a loop
+  # with annul - TODO - find bug in objdump!!!
+  #bn16,a loop
+  #ble16,a loop
+  #bl16,a loop
+  #bleu16,a loop
+  #bcs16,a loop
+  #bneg16,a loop
+  #bvs16,a loop
+  #bg16,a loop
+  #bge16,a loop
+  #bgu16,a loop
+  #bcc16,a loop
+  #bpos16,a loop
+  #bvc16,a loop
+  #ebn16,a loop
+  #eble16,a loop
+  #ebl16,a loop
+  #ebleu16,a loop
+  #ebcs16,a loop
+  #ebneg16,a loop
+  #ebvs16,a loop
+  #ebg16,a loop
+  #ebge16,a loop
+  #ebgu16,a loop
+  #ebcc16,a loop
+  #ebpos16,a loop
+  #ebvc16,a loop
 
   sparc16bx loop
