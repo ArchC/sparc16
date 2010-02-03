@@ -311,7 +311,7 @@ AC_ISA(sparc16){
 
     savesp16.set_asm("savesp %imm", simm9);
     savesp16.set_decoder(op=0x1c, op3=0x1);
-    e_savesp16.set_asm("esavesp %imm(immextii)", simm9+immext2);
+    e_savesp16.set_asm("esavesp %imm(immextii)", simm9+immext4);
     e_savesp16.set_decoder(opext=0x0b, op=0x1c, op3=0x1);
 
     sparc16bx.set_asm("sparc16bx %exp(pcreli)", simm9);

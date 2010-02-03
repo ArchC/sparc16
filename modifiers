@@ -169,7 +169,7 @@ ac_modifier_decode(lowextrri)
 /// Immediate handling for Type_I2
 ac_modifier_encode(immextii)
 {
-  reloc->Type_EXT_I2.immext2 = reloc->input & 0x3;
+  reloc->Type_EXT_I2.immext4 = reloc->input & 0x3;
   reloc->Type_EXT_I2.simm9 = reloc->input >> 2;
 }
 
