@@ -8,7 +8,7 @@
 	.global main
 main:
   sparcv8bx main_16
-  nop
+  nop32
 main_16:
 	savesp 16
 	mov16	1, %o1
