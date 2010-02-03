@@ -47,7 +47,7 @@
 /// SPARC_WDISP30 relocation.
 ac_modifier_encode(pcrelx)
 {
-  // The address is aligned on 2 bytes boundary
+  // The address is aligned on 4 byte boundary
   reloc->output = (reloc->input - reloc->address) >> 2;
 }
 
@@ -59,7 +59,7 @@ ac_modifier_decode(pcrelx)
 /// pcrel handling for Type_I
 ac_modifier_encode(pcreli)
 {
-  // The address is aligned on 2 bytes boundary
+  // The address is aligned on 2 byte boundary
   reloc->output = (reloc->input - reloc->address) >> 1;
 }
 
