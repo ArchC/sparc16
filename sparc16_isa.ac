@@ -43,7 +43,7 @@ AC_ISA(sparc16){
   /* SPARCv8 Formats */
  
   //ac_format Type_F1   = "%op:2 %disp30:30";
-  ac_format Type_F2A 	= "%op:2 %rd:5 %op2:3 %imm22:22";
+  //ac_format Type_F2A 	= "%op:2 %rd:5 %op2:3 %imm22:22";
   //ac_format Type_F2B 	= "%op:2 %an:1 %cond:4 %op2:3 %disp22:22:s";
   //ac_format Type_F3A 	= "%op:2 %rd:5 %op3:6 %rs1:5 %is:1 %asi:8 %rs2:5";
   //ac_format Type_F3B 	= "%op:2 %rd:5 %op3:6 %rs1:5 %is:1 %simm13:13:s";
@@ -52,7 +52,6 @@ AC_ISA(sparc16){
 
   //ac_instr<Type_F1>  call;
   //ac_instr<Type_F2A> nop, sethi;
-  ac_instr<Type_F2A> nop32;
 
   //ac_instr<Type_F2B> ba, bn, bne, be, bg, ble, bge, bl, bgu, bleu, bcc, bcs,
   //                   bpos, bneg, bvc, bvs;
@@ -87,6 +86,7 @@ AC_ISA(sparc16){
    */
 
   // Format by the instruction which exchange to 16 bit mode.
+  ac_format Type_F2A 	= "%op:2 %rd:5 %op2:3 %imm22:22";
   ac_format Type_XCHG = "%op:2 %unused:5 %op3:6 %disp19:19"; // Based on Type_F3B
   ac_format Type_I    = "%op:5 [ %imm11:11 | %simm11:11:s ]";
   ac_format Type_RI   = "%op:5 [ %imm8:8 | %simm8:8:s ] %rd:3";
@@ -106,6 +106,7 @@ AC_ISA(sparc16){
   ac_format Type_EXT_RR   = "%opext:5 %immext:8 %rsext:3 %op:5 %op2:5 %rs:3 %rd:3";
 
   ac_instr<Type_XCHG> sparcv8bx;
+  ac_instr<Type_F2A> nop32;
 
   ac_instr<Type_I> b16, be16, bne16, call16;
   ac_instr<Type_EXT_I> e_b16, e_be16, e_bne16, e_call16;
