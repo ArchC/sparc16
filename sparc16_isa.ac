@@ -234,10 +234,12 @@ AC_ISA(sparc16){
     e_mov16.set_asm("emov16 %imm, %reg", immext5+simm8, rd);
     e_mov16.set_decoder(opext=0x0b, op=0xe);
     
-    sethi16.set_asm("sethi16 %exp, %reg", imm8, rd);
+    sethi16.set_asm("sethi16 \%hi(%imm(highri)), %reg", imm8, rd);
+    sethi16.set_asm("sethi16 %imm, %reg", imm8, rd);
     sethi16.set_asm("sethi16 \%hi(%exp(highri)), %reg", imm8, rd);
     sethi16.set_decoder(op=0x4);
-    e_sethi16.set_asm("esethi16 %exp, %reg", imm8, rd);
+    e_sethi16.set_asm("esethi16 \%hi(%imm(highextri)), %reg", immext11+imm8, rd);
+    e_sethi16.set_asm("esethi16 %imm, %reg", immext11+imm8, rd);
     e_sethi16.set_asm("esethi16 \%hi(%exp(highextri)), %reg", immext11+imm8, rd);
     e_sethi16.set_decoder(opext=0x0b, op=0x4);
 
