@@ -665,29 +665,29 @@ AC_ISA(sparc16){
     e_restore16.set_decoder(opext=0x0b, op=0xa, op2=0x0);
 
     smul_reg16.set_asm("smul16 %reg, %reg", rs, rd);
-    smul_reg16.set_decoder(op=0x16, op2=0x3);
+    smul_reg16.set_decoder(op=0xa, op2=0x3);
     e_smul_reg16.set_asm("esmul16 %reg, %reg, %reg", rs, rsext, rd);
-    e_smul_reg16.set_decoder(opext=0x0b, op=0x16, op2=0x3);
+    e_smul_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x3);
 
     sdiv_reg16.set_asm("sdiv16 %reg, %reg", rs, rd);
-    sdiv_reg16.set_decoder(op=0x16, op2=0x7);
+    sdiv_reg16.set_decoder(op=0xa, op2=0x7);
     e_sdiv_reg16.set_asm("esdiv16 %reg, %reg, %reg", rs, rsext, rd);
-    e_sdiv_reg16.set_decoder(opext=0x0b, op=0x16, op2=0x7);
+    e_sdiv_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x7);
 
     umul_reg16.set_asm("umul16 %reg, %reg", rs, rd);
-    umul_reg16.set_decoder(op=0x16, op2=0x11);
+    umul_reg16.set_decoder(op=0xa, op2=0x11);
     e_umul_reg16.set_asm("eumul16 %reg, %reg, %reg", rs, rsext, rd);
-    e_umul_reg16.set_decoder(opext=0x0b, op=0x16, op2=0x11);
+    e_umul_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x11);
 
     udiv_reg16.set_asm("udiv16 %reg, %reg", rs, rd);
-    udiv_reg16.set_decoder(op=0x16, op2=0x12);
+    udiv_reg16.set_decoder(op=0xa, op2=0x12);
     e_udiv_reg16.set_asm("eudiv16 %reg, %reg, %reg", rs, rsext, rd);
-    e_udiv_reg16.set_decoder(opext=0x0b, op=0x16, op2=0x12);
+    e_udiv_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x12);
 
     xor_reg16.set_asm("xor16 %reg, %reg", rs, rd);
-    xor_reg16.set_decoder(op=0x17, op2=0x13);
+    xor_reg16.set_decoder(op=0xa, op2=0x13);
     e_xor_reg16.set_asm("exor16 %reg, %reg, %reg", rs, rsext, rd);
-    e_xor_reg16.set_decoder(opext=0x0b, op=0x17, op2=0x13);
+    e_xor_reg16.set_decoder(opext=0x0b, op=0xa, op2=0x13);
 
     rd16.set_asm("rd16 %prv_reg, %reg", rs, rd);
     rd16.set_decoder(op=0xa, op2=0xf);
