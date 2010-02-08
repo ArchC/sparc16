@@ -121,7 +121,9 @@ ac_modifier_decode(lowrris)
 ac_modifier_encode(lowextrri)
 {
   reloc->Type_EXT_RRI.immext8 = reloc->input & 0xff;
-  reloc->Type_EXT_RRI.simm5 = (reloc->input >> 8) & 0x1f;
+
+  // Ignore 3 bits from the higher part 0x1f => 0x3
+  reloc->Type_EXT_RRI.simm5 = (reloc->input >> 8) & 0x3;
 }
 
 ac_modifier_decode(lowextrri)
@@ -148,7 +150,9 @@ ac_modifier_decode(lowriri)
 ac_modifier_encode(lowextriri)
 {
   reloc->Type_EXT_RI2.immext7 = reloc->input & 0x7f;
-  reloc->Type_EXT_RI2.simm6 = (reloc->input >> 7) & 0x3f;
+
+  // Ignore 3 bits from the higher part 0x3f => 0x7
+  reloc->Type_EXT_RI2.simm6 = (reloc->input >> 7) & 0x7;
 }
 
 ac_modifier_decode(lowextriri)
@@ -174,8 +178,12 @@ ac_modifier_decode(lowrrirri)
 /// %lo handling for Type_EXT_RRI2
 ac_modifier_encode(lowextrrirri)
 {
-  reloc->Type_EXT_RRI2.immext11 = reloc->input & 0x7ff;
-  reloc->Type_EXT_RRI2.simm2 = (reloc->input >> 2) & 0x3;
+  // Ignore 3 bits from the higher part, 0x7ff => 0x3ff
+  reloc->Type_EXT_RRI2.immext11 = reloc->input & 0x3ff;
+
+  // Ignore 3 bits from the higher part
+  //reloc->Type_EXT_RRI2.simm2 = (reloc->input >> 2) & 0x3;
+  reloc->Type_EXT_RRI2.simm2 = 0;
 }
 
 ac_modifier_decode(lowextrrirri)

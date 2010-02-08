@@ -10,6 +10,3 @@ loop:
   mov16 0xff, %i1
   mov16 -1, %i1
   emov16 0x7ffff, %i1
-  esethi16 0x7ffff, %i1 # high part of 0xffffe000
-  esethi16 %hi(0xffffe000), %i1
-  esethi16 %hi(loop), %i1
