@@ -38,6 +38,7 @@ constant:
   xor16 %i0, -1, %i1
   xor16 %i0, %lo(0xeeff), %i1
   exor16 %i0, -1, %i1
+  exor16 %i0, 0xaa, %i1
   exor16 %i0, %lo(0xeeeffff), %i1
 
   orn16 %i0, -1, %i1
