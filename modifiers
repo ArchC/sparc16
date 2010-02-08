@@ -84,17 +84,14 @@ ac_modifier_decode(highri)
 /// %hi handling for Type_EXT_RI
 ac_modifier_encode(highextri)
 {
-  unsigned int hipart = reloc->input >> 13;
-  reloc->Type_EXT_RI.imm8 = hipart & 0xff;
-  reloc->Type_EXT_RI.immext11 = hipart >> 8;
+  reloc->Type_SETHI.imm22 = reloc->input >> 10;
 }
 
 ac_modifier_decode(highextri)
 {
   unsigned int insn = (unsigned)reloc->addend;
-  unsigned int hi = ((insn >> 16) & 0x7ff) << 8;
-  unsigned int low = ((insn >> 3) & 0xff);
-  reloc->output = (hi | low) << 13;
+  unsigned int high = (insn >> 3) & 0x3fffff;
+  reloc->output = high << 10;
 }
 
 /// %lo handling for Type_RRI

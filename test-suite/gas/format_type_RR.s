@@ -9,19 +9,14 @@
     esubx16 %i0, %i1, %i2
 
     btst16 %i0, %i2
-    #ebtst16 %i0, %i1, %i2
 
     clrw [%i0 + %i2]
-    #eclrw [%i0 + %i1 + %i2]
 
     clrb16 [%i0 + %i2]
-    #eclrb16 [%i0 + %i1 + %i2]
 
     clrh16 [%i0 + %i2]
-    #eclrh16 [%i0 + %i1 + %i2]
 
     cmp16 %i0, %i2
-    #ecmp16 %i0, %i1, %i2
 
     stb16 %i2, [%i0]
     estb16 %i2, [%i0+%i1]
@@ -29,17 +24,11 @@
     sth16 %i2, [%i0]
     esth16 %i2, [%i0+%i1]
 
-    std16 %i2, [%i0]
-    estd16 %i2, [%i0+%i1]
-
     lduh16 [%i0], %i2
     elduh16 [%i0+%i1], %i2
 
     ldub16 [%i0], %i2
     eldub16 [%i0+%i1], %i2
-
-    ldd16 [%i0], %i2
-    eldd16 [%i0+%i1], %i2
 
     ldsb16 [%i0], %i2
     eldsb16 [%i0+%i1], %i2
@@ -70,6 +59,21 @@
 
     restore16 %i0, %i2
     erestore16 %i0, %i1, %i2
+
+    smul16 %i0, %i1
+    esmul16 %i0, %i1, %i2
+
+    sdiv16 %i0, %i1
+    esdiv16 %i0, %i1, %i2
+
+    umul16 %i0, %i1
+    eumul16 %i0, %i1, %i2
+
+    udiv16 %i0, %i1
+    eudiv16 %i0, %i1, %i2
+    
+    xor16 %i0, %i1
+    exor16 %i0, %i1, %i2
 
     rd16 %wim, %i0
     rd16 %y, %i0
