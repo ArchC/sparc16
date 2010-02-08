@@ -199,9 +199,9 @@ AC_ISA(sparc16){
     /// SPARC16 Encoding and asm patterns
 
     /// Format SETHI
-    sethi32.set_asm("esethi32 \%hi(%imm(highextri)), %reg", imm22, rd);
-    sethi32.set_asm("esethi32 %imm, %reg", imm22, rd);
-    sethi32.set_asm("esethi32 \%hi(%exp(highextri)), %reg", imm22, rd);
+    sethi32.set_asm("sethi32 \%hi(%imm(highextri)), %reg", imm22, rd);
+    sethi32.set_asm("sethi32 %imm, %reg", imm22, rd);
+    sethi32.set_asm("sethi32 \%hi(%exp(highextri)), %reg", imm22, rd);
     sethi32.set_decoder(op=0x16);
     
     /// Format XCHG
