@@ -12,7 +12,7 @@ main:
 main_16:
 	savesp 16
 	mov16	1, %o1
-	esethi16	%hi(.LLC0), %o0
+	sethi32	%hi(.LLC0), %o0
 	eor16	%o0, %lo(.LLC0), %o0
 	sparc16bx	printf
   nop
