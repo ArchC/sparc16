@@ -14,7 +14,7 @@ main_16:
 	mov16	1, %o1
 	sethi32	%hi(.LLC0), %o0
 	eor16	%o0, %lo(.LLC0), %o0
-	sparc16bx	printf
+	callx	printf
   nop
 	mov16	0, %i0
 	ret
