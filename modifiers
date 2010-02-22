@@ -44,7 +44,7 @@
 ////      + Used by the linker to fix the relocations
 /////////////////////////////////////////////////////////
 
-/// pcrel handling for Type_XCHG, which works the same as 
+/// pcrel handling for callx, which works the same as 
 /// SPARC_WDISP30 relocation.
 ac_modifier_encode(pcrelx)
 {

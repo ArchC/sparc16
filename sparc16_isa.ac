@@ -110,8 +110,8 @@ AC_ISA(sparc16){
   ac_instr<Type_XCHG> sparcv8bx;
   ac_instr<Type_NOP> nop32;
 
-  ac_instr<Type_I> b16, be16, bne16, call16;
-  ac_instr<Type_EXT_I> e_b16, e_be16, e_bne16, e_call16;
+  ac_instr<Type_I> b16, be16, bne16, call16, callx;
+  ac_instr<Type_EXT_I> e_b16, e_be16, e_bne16, e_call16, e_callx;
 
   ac_instr<Type_RI> cmp16, mov16, sethi16;
   ac_instr<Type_EXT_RI> e_cmp16, e_mov16, e_sethi16;
@@ -205,7 +205,7 @@ AC_ISA(sparc16){
     sethi32.set_decoder(op=0x16);
     
     /// Format XCHG
-    sparcv8bx.set_asm("sparcv8bx %exp(pcrelx)", disp19);
+    sparcv8bx.set_asm("sparcv8bx %exp(pcreli)", disp19);
     sparcv8bx.set_decoder(op=0x2, op3=0x19);
 
     /// Format NOP
@@ -232,6 +232,11 @@ AC_ISA(sparc16){
     call16.set_decoder(op=0x00);
     e_call16.set_asm("ecall16 %exp(pcreli)", immext11+simm11);
     e_call16.set_decoder(opext=0x0b, op=0x00);
+
+    callx.set_asm("callx %exp(pcrelx)", simm11);
+    callx.set_decoder(op=0x10);
+    e_callx.set_asm("ecallx %exp(pcrelx)", immext11+simm11);
+    e_callx.set_decoder(opext=0x0b, op=0x10);
 
     /// Format RI, EXT_RI
     cmp16.set_asm("cmp16 %reg, %imm", rd, simm8);
