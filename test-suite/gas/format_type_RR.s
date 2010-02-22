@@ -87,6 +87,7 @@
 
     callr %i0
     jmpr %i0
+    jmprx %i0
     ret
     retl
     trestore
