@@ -2,8 +2,8 @@
 
 linker_script="/p/archc-tools/sparc16/toolchain-scripts/sparcleon.x"
 #linker_script="/home/ecco/mestrado/pack/sparc16/toolchain-scripts/sparcleon.x"
-#gaisler_toolchain_dir="/opt/sparc-elf-4.4.1/bin"
-gaisler_toolchain_dir="/usr/sparc-elf-4.4.1/bin"
+gaisler_toolchain_dir="/opt/sparc-elf-4.4.1/bin"
+#gaisler_toolchain_dir="/usr/sparc-elf-4.4.1/bin"
 
 sparc16-elf-ld --script=$linker_script -o $1 \
 $gaisler_toolchain_dir/../lib/gcc/sparc-elf/4.4.1/../../../../sparc-elf/lib/locore_mvt.o \
