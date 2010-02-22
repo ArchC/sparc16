@@ -12,3 +12,4 @@ loop:
   ecall16 loop
   bne16 loop
   ebne16 loop
+  callx loop

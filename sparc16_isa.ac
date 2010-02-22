@@ -137,7 +137,7 @@ AC_ISA(sparc16){
                     stb_reg16, sth_reg16, lduh_reg16, ldub_reg16, ldsb_reg16, 
                     ldsh_reg16, sra_reg16, srl_reg16, sll_reg16, orn_reg16, xnor_reg16, 
                     andn_reg16, neg_reg16, restore16, rd16, wr16, callr, jmpr, ret, retl, trestore, nop,
-                    smul_reg16, sdiv_reg16, umul_reg16, udiv_reg16, xor_reg16;
+                    smul_reg16, sdiv_reg16, umul_reg16, udiv_reg16, xor_reg16, trap_reg16a, trap_reg16b;
   ac_instr<Type_EXT_RR> e_addx_reg16, e_subx_reg16, 
                     e_stb_reg16, e_sth_reg16, e_lduh_reg16, e_ldub_reg16, 
                     e_ldsb_reg16, e_ldsh_reg16, e_sra_reg16, e_srl_reg16, e_sll_reg16, 
@@ -173,6 +173,28 @@ AC_ISA(sparc16){
   ac_asm_map anul {
       "" = 0;
       ",a" = 1;   
+  }
+
+  ac_asm_map trapconda {
+    "a"   = 0;
+    "n"   = 1;
+    "ne"  = 2;
+    "e"   = 3;
+    "g"   = 4;
+    "le"  = 5;
+    "ge"  = 6;
+    "l"   = 7;
+  }
+
+  ac_asm_map trapcondb {
+    "gu"  = 0;
+    "leu" = 1;
+    "cc"  = 2;
+    "cs"  = 3;
+    "pos" = 4;
+    "neg" = 5;
+    "vc"  = 6;
+    "vs"  = 7;
   }
 
   //ac_asm_map cond {
@@ -716,6 +738,12 @@ AC_ISA(sparc16){
 
     nop.set_asm("nop");
     nop.set_decoder(op=0xa, op2=0x1f, rs=0x5);
+
+    trap_reg16a.set_asm("t%trapconda %reg", rs, rd);
+    trap_reg16a.set_decoder(op=0xa, op2=0x0b);
+
+    trap_reg16b.set_asm("t%trapcondb %reg", rs, rd);
+    trap_reg16b.set_decoder(op=0xa, op2=0x10);
 
     /// Format RRR
     add_reg16.set_asm("add16 %reg, %reg, %reg", rs1, rs2, rd);

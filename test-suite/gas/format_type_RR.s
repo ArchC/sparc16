@@ -91,3 +91,22 @@
     retl
     trestore
     nop
+
+    ta %i0
+    tn %i0
+    tne %i0
+    te %i0
+    tg %i0
+    tle %i0
+    tge %i0
+    tl %i0 
+
+    tgu %i1
+    tleu %i1
+    tcc %i1
+    tcs %i1
+    tpos %i1
+    tneg %i1
+    tvc %i1
+    tvs %i1
+
