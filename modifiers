@@ -52,7 +52,7 @@ ac_modifier_encode(pcrelx)
   unsigned long reladdr = reloc->input - reloc->address;
 
   // If not aligned on 4 bytes boundary make it so.
-  if (reladdr & 0x3)
+  if (reladdr % 4)
     reladdr -= 2;
 
   reloc->output = reladdr >> 2;
