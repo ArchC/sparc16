@@ -350,9 +350,9 @@ AC_ISA(sparc16){
     e_savesp16.set_asm("esavesp %imm", immext4+simm9);
     e_savesp16.set_decoder(opext=0x0b, op=0x1c, op3=0x1);
 
-    sparc16bx.set_asm("sparc16bx %exp(pcreli)", simm9);
+    sparc16bx.set_asm("sparc16bx %exp(pcrelx)", simm9);
     sparc16bx.set_decoder(op=0x1e, op3=0x1);
-    e_sparc16bx.set_asm("esparc16bx %exp(pcreli)", immext11+simm9);
+    e_sparc16bx.set_asm("esparc16bx %exp(pcrelx)", immext11+simm9);
     e_sparc16bx.set_decoder(opext=0x0b, op=0x1e, op3=0x1);
 
     bn16.set_asm("bn16%[anul] %exp(pcreli)", an, simm8);
