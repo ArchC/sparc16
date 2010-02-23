@@ -49,13 +49,13 @@
 ac_modifier_encode(pcrelx)
 {
   // The address is aligned on 4 byte boundary
-  unsigned long reladdr = reloc->input - reloc->address;
+  long reladdr = reloc->address;
 
   // If not aligned on 4 bytes boundary make it so.
   if (reladdr % 4)
     reladdr -= 2;
 
-  reloc->output = reladdr >> 2;
+  reloc->output = (reloc->input - reladdr) >> 2;
 }
 
 ac_modifier_decode(pcrelx)
