@@ -75,6 +75,34 @@ ac_modifier_decode(pcreli)
   reloc->output = (reloc->input << 1) + reloc->address;
 }
 
+/// %lo handling for Type_RI
+ac_modifier_encode(lowri)
+{
+  reloc->Type_RI.simm8 = reloc->input & 0xff;
+}
+
+ac_modifier_decode(lowri)
+{
+  unsigned int insn = (unsigned)reloc->addend;
+  reloc->output = (int)((insn >> 3) & 0xff);
+}
+
+/// %lo handling for Type_EXT_RI
+ac_modifier_encode(lowextri)
+{
+  // The total imm is 13 bits, but relocation uses 10
+  reloc->Type_EXT_RI.simm8 = reloc->input & 0xff;
+  reloc->Type_EXT_RI.immext5 = (reloc->input >> 3) & 0x1f;
+}
+
+ac_modifier_decode(lowextri)
+{
+  unsigned int insn = (unsigned)reloc->addend;
+  unsigned int hi = ((insn >> 16) & 0x1f) << 8;
+  unsigned int low = (insn >> 3) & 0xff;
+  reloc->output = (int)(hi | low);
+}
+
 /// %hi handling for Type_RI
 ac_modifier_encode(highri)
 {

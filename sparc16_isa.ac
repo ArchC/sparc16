@@ -114,7 +114,7 @@ AC_ISA(sparc16){
   ac_instr<Type_EXT_I> e_b16, e_be16, e_bne16, e_call16, e_callx;
 
   ac_instr<Type_RI> cmp16, mov16, sethi16;
-  ac_instr<Type_EXT_RI> e_cmp16, e_mov16, e_sethi16;
+  ac_instr<Type_EXT_RI> e_cmp16, e_mov16;
 
   ac_instr<Type_RRI> add16, and16, ld16, st16, ldd16, std16, sra16, srl16, sll16; 
   ac_instr<Type_EXT_RRI> e_add16, e_and16, e_ld16, e_st16, e_ldd16, e_std16;
@@ -268,10 +268,12 @@ AC_ISA(sparc16){
     e_cmp16.set_decoder(opext=0x0b, op=0x0d);
 
     mov16.set_asm("mov16 %imm, %reg", simm8, rd);
+    mov16.set_asm("mov16 \%lo(%exp(lowri)), %reg", simm8, rd);
     mov16.set_decoder(op=0xe);
     e_mov16.set_asm("emov16 %imm, %reg", immext5+simm8, rd);
+    e_mov16.set_asm("emov16 \%lo(%exp(lowextri)), %reg", immext5+simm8, rd);
     e_mov16.set_decoder(opext=0x0b, op=0xe);
-    
+
     sethi16.set_asm("sethi16 \%hi(%imm(highri)), %reg", imm8, rd);
     sethi16.set_asm("sethi16 %imm, %reg", imm8, rd);
     sethi16.set_asm("sethi16 \%hi(%exp(highri)), %reg", imm8, rd);
