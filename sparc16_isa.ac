@@ -89,7 +89,7 @@ AC_ISA(sparc16){
   ac_format Type_SETHI = "%op:5 %unused:2 imm22:22 rd:3";
   ac_format Type_NOP   = "%op:2 %rd:5 %op2:3 %imm22:22"; // Based on Type_F2A
   ac_format Type_XCHG  = "%op:2 %unused:5 %op3:6 %disp19:19"; // Based on Type_F3B
-  ac_format Type_I     = "%op:5 %simm11:11:s";
+  ac_format Type_I     = "%op:5 [ %simm11:11:s | %an:1 %simm10:10:s ]";
   ac_format Type_RI    = "%op:5 [ %imm8:8 | %simm8:8:s ] %rd:3";
   ac_format Type_RRI   = "%op:5 [ %imm5:5 | %simm5:5:s ] %rs:3 %rd:3";
   ac_format Type_I2    = "%op:5 [ %cond:2 %an:1 %simm8:8:s | %op2:2 %t:1 %reg32:5 %reg8:3 | %op3:2 %simm9:9:s ]";
@@ -98,7 +98,7 @@ AC_ISA(sparc16){
   ac_format Type_RR    = "%op:5 %op2:5 %rs:3 %rd:3";
   ac_format Type_RRR2  = "%op:5 %op2:2 %rs2:3 %rs1:3 %rd:3";
 
-  ac_format Type_EXT_I    = "%opext:5 %immext11:11:s %op:5 %simm11:11:s ]";
+  ac_format Type_EXT_I    = "%opext:5 %immext11:11:s %op:5 [ %simm11:11:s | %an:1 %simm10:10:s ]";
   ac_format Type_EXT_RI   = "%opext:5 [ %immext11:11 | %unused:6 %immext5:5:s ] %op:5 [ %imm8:8 | %simm8:8:s ] %rd:3";
   ac_format Type_EXT_RRI  = "%opext:5 [ %immext11:11:s | %unused:3 %immext8:8:s ] %op:5 %simm5:5:s %rs:3 %rd:3";
   ac_format Type_EXT_I2   = "%opext:5 [ %immext11:11:s | %unused:7 %immext4:4:s ] %op:5 [ %cond:2 %an:1 %simm8:8:s | %op2:2 %t:1 %reg32:5 %reg8:3 | %op3:2 %simm9:9:s ]";
@@ -236,19 +236,19 @@ AC_ISA(sparc16){
     nop32.set_decoder(op=0x00, op2=0x04, imm22=0x0, rd=0x0);
 
     /// Format I and EXT_I
-    b16.set_asm("b16 %exp(pcreli)", simm11);
+    b16.set_asm("b16%[anul] %exp(pcreli)", an, simm10);
     b16.set_decoder(op=0x08);
-    e_b16.set_asm("eb16 %exp(pcreli)", immext11+simm11);
+    e_b16.set_asm("eb16%[anul] %exp(pcreli)", an, immext11+simm10);
     e_b16.set_decoder(opext=0x0b, op=0x08);
 
-    be16.set_asm("be16 %exp(pcreli)", simm11);
+    be16.set_asm("be16%[anul] %exp(pcreli)", an, simm10);
     be16.set_decoder(op=0x01);
-    e_be16.set_asm("ebe16 %exp(pcreli)", immext11+simm11);
+    e_be16.set_asm("ebe16%[anul] %exp(pcreli)", an, immext11+simm10);
     e_be16.set_decoder(opext=0x0b, op=0x01);
 
-    bne16.set_asm("bne16 %exp(pcreli)", simm11);
+    bne16.set_asm("bne16%[anul] %exp(pcreli)", an, simm10);
     bne16.set_decoder(op=0x09);
-    e_bne16.set_asm("ebne16 %exp(pcreli)", immext11+simm11);
+    e_bne16.set_asm("ebne16%[anul] %exp(pcreli)", an, immext11+simm10);
     e_bne16.set_decoder(opext=0x0b, op=0x09);
 
     call16.set_asm("call16 %exp(pcreli)", simm11);
