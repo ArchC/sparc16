@@ -170,28 +170,28 @@ ac_modifier_decode(lowextrri)
 /// %lo handling for Type_RI2
 ac_modifier_encode(lowriri)
 {
-  reloc->Type_RI2.simm6 = reloc->input & 0x3f;
+  reloc->Type_RI2.simm5 = reloc->input & 0x1f;
 }
 
 ac_modifier_decode(lowriri)
 {
   unsigned int insn = (unsigned)reloc->addend;
-  reloc->output = (int)((insn >> 3) & 0x3f);
+  reloc->output = (int)((insn >> 3) & 0x1f);
 }
 
 /// %lo handling for Type_EXT_RI2
 ac_modifier_encode(lowextriri)
 {
   // The total imm is 13 bits, but relocation uses 10
-  reloc->Type_EXT_RI2.simm6 = reloc->input & 0x3f;
-  reloc->Type_EXT_RI2.immext7 = (reloc->input >> 6) & 0xf;
+  reloc->Type_EXT_RI2.simm5 = reloc->input & 0x1f;
+  reloc->Type_EXT_RI2.immext8 = (reloc->input >> 5) & 0xff;
 }
 
 ac_modifier_decode(lowextriri)
 {
   unsigned int insn = (unsigned)reloc->addend;
-  unsigned int hi = ((insn >> 16) & 0x7f) << 6;
-  unsigned int low = (insn >> 3) & 0x3f;
+  unsigned int hi = ((insn >> 16) & 0xff) << 5;
+  unsigned int low = (insn >> 3) & 0x1f;
   reloc->output = (int)(hi | low);
 }
 
@@ -221,5 +221,34 @@ ac_modifier_decode(lowextrrirri)
   unsigned int hi = ((insn >> 16) & 0x7ff) << 2;
   unsigned int low = ((insn >> 6) & 0x3);
   reloc->output = (int)(hi | low);
+}
+
+
+/// %lo handling for Type_EXT_LDST
+ac_modifier_encode(lowextldst)
+{
+  // The total imm is 13 bits, but relocation uses 10
+  reloc->Type_EXT_LDST.simm4 = reloc->input & 0x0f;
+  reloc->Type_EXT_LDST.immext9 = (reloc->input >> 4) & 0x0f;
+}
+
+ac_modifier_decode(lowextldst)
+{
+  unsigned int insn = (unsigned)reloc->addend;
+  unsigned int hi = ((insn >> 16) & 0x1ff) << 4;
+  unsigned int low = ((insn >> 6) & 0x0f);
+  reloc->output = (int)(hi | low);
+}
+
+/// %lo handling for Type_LDST
+ac_modifier_encode(lowldst)
+{
+  reloc->Type_LDST.simm4 = reloc->input & 0x0f;
+}
+
+ac_modifier_decode(lowldst)
+{
+  unsigned int insn = (unsigned)reloc->addend;
+  reloc->output = (int)((insn >> 6) & 0x0f);
 }
 
