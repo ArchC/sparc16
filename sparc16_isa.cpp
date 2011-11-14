@@ -1594,6 +1594,908 @@ void ac_behavior( trap_imm )
   stop();
 }
 
+// sparc16 instructions
+
+// void ac_behavior ( sethi32 )
+// {
+
+// }
+
+// void ac_behavior ( sparcv8bx )
+// {
+
+// }
+
+// void ac_behavior ( nop32 )
+// {
+
+// }
+
+// void ac_behavior ( b16 )
+// {
+
+// }
+
+// void ac_behavior ( e_b16 )
+// {
+
+// }
+
+// void ac_behavior ( be16 )
+// {
+
+// }
+
+// void ac_behavior ( e_be16 )
+// {
+
+// }
+
+// void ac_behavior ( bne16 )
+// {
+
+// }
+
+// void ac_behavior ( e_bne16 )
+// {
+
+// }
+
+// void ac_behavior ( call16 )
+// {
+
+// }
+
+// void ac_behavior ( e_call16 )
+// {
+
+// }
+
+// void ac_behavior ( callx )
+// {
+
+// }
+
+// void ac_behavior ( e_callx )
+// {
+
+// }
+
+// void ac_behavior ( cmp16 )
+// {
+
+// }
+
+// void ac_behavior ( e_cmp16 )
+// {
+
+// }
+
+// void ac_behavior ( mov16 )
+// {
+
+// }
+
+// void ac_behavior ( e_mov16 )
+// {
+
+// }
+
+// void ac_behavior ( sethi16 )
+// {
+
+// }
+
+// void ac_behavior ( add16 )
+// {
+
+// }
+
+// void ac_behavior ( e_add16 )
+// {
+
+// }
+
+// void ac_behavior ( and16 )
+// {
+
+// }
+
+// void ac_behavior ( e_and16 )
+// {
+
+// }
+
+// void ac_behavior ( ld16 )
+// {
+
+// }
+
+// void ac_behavior ( e_ld16 )
+// {
+
+// }
+
+// void ac_behavior ( st16 )
+// {
+
+// }
+
+// void ac_behavior ( e_st16 )
+// {
+
+// }
+
+// void ac_behavior ( sll16 )
+// {
+
+// }
+
+// void ac_behavior ( srl16 )
+// {
+
+// }
+
+// void ac_behavior ( sra16 )
+// {
+
+// }
+
+// void ac_behavior ( mov8to3216 )
+// {
+
+// }
+
+// void ac_behavior ( mov32to816 )
+// {
+
+// }
+
+// void ac_behavior ( savesp16 )
+// {
+
+// }
+
+// void ac_behavior ( e_savesp16 )
+// {
+
+// }
+
+// void ac_behavior ( sparc16bx )
+// {
+
+// }
+
+// void ac_behavior ( e_sparc16bx )
+// {
+
+// }
+
+// void ac_behavior ( bn16 )
+// {
+
+// }
+
+// void ac_behavior ( e_bn16 )
+// {
+
+// }
+
+// void ac_behavior ( bg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_bg16 )
+// {
+
+// }
+
+// void ac_behavior ( ble16 )
+// {
+
+// }
+
+// void ac_behavior ( e_ble16 )
+// {
+
+// }
+
+// void ac_behavior ( bge16 )
+// {
+
+// }
+
+// void ac_behavior ( e_bge16 )
+// {
+
+// }
+
+// void ac_behavior ( bl16 )
+// {
+
+// }
+
+// void ac_behavior ( e_bl16 )
+// {
+
+// }
+
+// void ac_behavior ( bgu16 )
+// {
+
+// }
+
+// void ac_behavior ( e_bgu16 )
+// {
+
+// }
+
+// void ac_behavior ( bleu16 )
+// {
+
+// }
+
+// void ac_behavior ( e_bleu16 )
+// {
+
+// }
+
+// void ac_behavior ( bcc16 )
+// {
+
+// }
+
+// void ac_behavior ( e_bcc16 )
+// {
+
+// }
+
+// void ac_behavior ( bcs16 )
+// {
+
+// }
+
+// void ac_behavior ( e_bcs16 )
+// {
+
+// }
+
+// void ac_behavior ( bpos16 )
+// {
+
+// }
+
+// void ac_behavior ( e_bpos16 )
+// {
+
+// }
+
+// void ac_behavior ( bneg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_bneg16 )
+// {
+
+// }
+
+// void ac_behavior ( bvc16 )
+// {
+
+// }
+
+// void ac_behavior ( e_bvc16 )
+// {
+
+// }
+
+// void ac_behavior ( bvs16 )
+// {
+
+// }
+
+// void ac_behavior ( e_bvs16 )
+// {
+
+// }
+
+// void ac_behavior ( addfp )
+// {
+
+// }
+
+// void ac_behavior ( e_addfp )
+// {
+
+// }
+
+// void ac_behavior ( stfp )
+// {
+
+// }
+
+// void ac_behavior ( e_stfp )
+// {
+
+// }
+
+// void ac_behavior ( ldfp )
+// {
+
+// }
+
+// void ac_behavior ( e_ldfp )
+// {
+
+// }
+
+// void ac_behavior ( addsp )
+// {
+
+// }
+
+// void ac_behavior ( e_addsp )
+// {
+
+// }
+
+// void ac_behavior ( stsp )
+// {
+
+// }
+
+// void ac_behavior ( e_stsp )
+// {
+
+// }
+
+// void ac_behavior ( ldsp )
+// {
+
+// }
+
+// void ac_behavior ( e_ldsp )
+// {
+
+// }
+
+// void ac_behavior ( btst16 )
+// {
+
+// }
+
+// void ac_behavior ( e_btst16 )
+// {
+
+// }
+
+// void ac_behavior ( clrw_imm16 )
+// {
+
+// }
+
+// void ac_behavior ( e_clrw_imm16 )
+// {
+
+// }
+
+// void ac_behavior ( addx16 )
+// {
+
+// }
+
+// void ac_behavior ( e_addx16 )
+// {
+
+// }
+
+// void ac_behavior ( subx16 )
+// {
+
+// }
+
+// void ac_behavior ( e_subx16 )
+// {
+
+// }
+
+// void ac_behavior ( smul16 )
+// {
+
+// }
+
+// void ac_behavior ( e_smul16 )
+// {
+
+// }
+
+// void ac_behavior ( sdiv16 )
+// {
+
+// }
+
+// void ac_behavior ( e_sdiv16 )
+// {
+
+// }
+
+// void ac_behavior ( umul16 )
+// {
+
+// }
+
+// void ac_behavior ( e_umul16 )
+// {
+
+// }
+
+// void ac_behavior ( udiv16 )
+// {
+
+// }
+
+// void ac_behavior ( e_udiv16 )
+// {
+
+// }
+
+// void ac_behavior ( or16 )
+// {
+
+// }
+
+// void ac_behavior ( e_or16 )
+// {
+
+// }
+
+// void ac_behavior ( xor16 )
+// {
+
+// }
+
+// void ac_behavior ( e_xor16 )
+// {
+
+// }
+
+// void ac_behavior ( orn16 )
+// {
+
+// }
+
+// void ac_behavior ( e_orn16 )
+// {
+
+// }
+
+// void ac_behavior ( xnor16 )
+// {
+
+// }
+
+// void ac_behavior ( e_xnor16 )
+// {
+
+// }
+
+// void ac_behavior ( addx_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_addx_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( subx_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_subx_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( btst_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( clrw16 )
+// {
+
+// }
+
+// void ac_behavior ( clrb16 )
+// {
+
+// }
+
+// void ac_behavior ( clrh16 )
+// {
+
+// }
+
+// void ac_behavior ( cmp_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( stb_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_stb_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( sth_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_sth_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( lduh_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_lduh_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( ldub_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_ldub_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( ldsb_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_ldsb_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( ldsh_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_ldsh_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( sra_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_sra_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( srl_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_srl_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( sll_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_sll_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( orn_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_orn_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( xnor_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_xnor_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( andn_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_andn_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( neg_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_neg_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( restore16 )
+// {
+
+// }
+
+// void ac_behavior ( e_restore16 )
+// {
+
+// }
+
+// void ac_behavior ( smul_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_smul_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( sdiv_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_sdiv_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( umul_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_umul_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( udiv_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_udiv_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( xor_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( e_xor_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( rd16 )
+// {
+
+// }
+
+// void ac_behavior ( wr16 )
+// {
+
+// }
+
+// void ac_behavior ( callr )
+// {
+
+// }
+
+// void ac_behavior ( callrx )
+// {
+
+// }
+
+// void ac_behavior ( jmpr )
+// {
+
+// }
+
+// void ac_behavior ( jmprx )
+// {
+
+// }
+
+// void ac_behavior ( ret )
+// {
+
+// }
+
+// void ac_behavior ( retl )
+// {
+
+// }
+
+// void ac_behavior ( trestore )
+// {
+
+// }
+
+// void ac_behavior ( nop )
+// {
+
+// }
+
+// void ac_behavior ( trap_reg16a )
+// {
+
+// }
+
+// void ac_behavior ( trap_reg16b )
+// {
+
+// }
+
+// void ac_behavior ( add_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( sub_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( and_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( or_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( st_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( ld_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( ldd_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( std_reg16 )
+// {
+
+// }
+
+// void ac_behavior ( ldd16 )
+// {
+
+// }
+
+// void ac_behavior ( e_ldd16 )
+// {
+
+// }
+
+// void ac_behavior ( std16 )
+// {
+
+// }
+
+// void ac_behavior ( e_std16 )
+// {
+
+// }
+
+// void ac_behavior ( stb16 )
+// {
+
+// }
+
+// void ac_behavior ( e_stb16 )
+// {
+
+// }
+
+// void ac_behavior ( sth16 )
+// {
+
+// }
+
+// void ac_behavior ( e_sth16 )
+// {
+
+// }
+
+// void ac_behavior ( ldsb16 )
+// {
+
+// }
+
+// void ac_behavior ( e_ldsb16 )
+// {
+
+// }
+
+// void ac_behavior ( ldub16 )
+// {
+
+// }
+
+// void ac_behavior ( e_ldub16 )
+// {
+
+// }
+
+// void ac_behavior ( ldsh16 )
+// {
+
+// }
+
+// void ac_behavior ( e_ldsh16 )
+// {
+
+// }
+
+// void ac_behavior ( lduh16 )
+// {
+
+// }
+
+// void ac_behavior ( e_lduh16 )
+// {
+
+// }
+
 //!Instruction unimplemented behavior method.
 void ac_behavior( unimplemented )
 {
