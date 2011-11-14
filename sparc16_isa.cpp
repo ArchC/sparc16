@@ -86,11 +86,11 @@ inline void update_pc(bool branch, bool taken, bool b_always, bool annul, ac_wor
 				dbg_printf(CB_RED "Branch Taken" C_RESET LF);
 			}
 			else {
-				npc+=4;
+				npc+=2;
 			}
 			dbg_printf("Delay instruction annuled\n");
 			ac_pc = npc;
-			npc+=4;
+			npc+=2;
 		}
 		// else (next instruction will be executed)
 		else {
@@ -100,7 +100,7 @@ inline void update_pc(bool branch, bool taken, bool b_always, bool annul, ac_wor
 				dbg_printf(CB_RED "Branch Taken" C_RESET LF);
 			}
 			else {
-				npc+=4;
+				npc+=2;
 			}
 		}
 #ifdef AC_MEM_HIERARCHY
@@ -142,7 +142,7 @@ void ac_behavior(begin)
 {
   dbg_printf("@@@ begin behavior @@@\n");
   REGS[0] = 0;  //writeReg can't initialize register 0
-  npc = ac_pc + 4;
+  npc = ac_pc + 2;
 
   CWP = 0xF0;
 }
