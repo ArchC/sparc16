@@ -162,12 +162,15 @@ AC_ISA(sparc16){
       "%l0" = 4;
       "%o"[0..2] = [5..7];
       "%r"[0..31] = [0..31];
-      //"%g"[0..7] = [0..7];
-      //"%o"[0..7] = [8..15];
-      //"%l"[0..7] = [16..23];
-      //"%i"[0..7] = [24..31];
-      //"%fp" = 30;
-      //"%sp" = 14;
+  }
+
+  ac_asm_map v8reg {
+      "%g"[0..7] = [0..7];
+      "%o"[0..7] = [8..15];
+      "%l"[0..7] = [16..23];
+      "%i"[0..7] = [24..31];
+      "%fp" = 30;
+      "%sp" = 14;
   }
 
   // The registers defined below can only be used by 
@@ -332,10 +335,10 @@ AC_ISA(sparc16){
     sra16.set_decoder(op=0x7);
 
     /// Format I2 and EXT_I2
-    mov8to3216.set_asm("movra %reg, %reg", reg8, reg32);
+    mov8to3216.set_asm("movra %reg, %v8reg", reg8, reg32);
     mov8to3216.set_decoder(op=0x1e, op2=0x0, t=1);
 
-    mov32to816.set_asm("movrb %reg, %reg", reg32, reg8);
+    mov32to816.set_asm("movrb %v8reg, %reg", reg32, reg8);
     mov32to816.set_decoder(op=0x1e, op2=0x0, t=0);
 
     savesp16.set_asm("savesp %imm", simm9);
