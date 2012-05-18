@@ -241,7 +241,7 @@ ac_modifier_encode(lowextriri)
 {
   // The total imm is 13 bits, but relocation uses 10
   reloc->Type_EXT_RI2.simm5 = reloc->input & 0x1f;
-  reloc->Type_EXT_RI2.immext8 = (reloc->input >> 5) & 0xff;
+  reloc->Type_EXT_RI2.immext8 = (reloc->input >> 5) & 0x1f;
 }
 
 ac_modifier_decode(lowextriri)
@@ -285,8 +285,8 @@ ac_modifier_decode(lowextrrirri)
 ac_modifier_encode(lowextldst)
 {
   // The total imm is 13 bits, but relocation uses 10
-  reloc->Type_EXT_LDST.simm4 = reloc->input & 0x0f;
-  reloc->Type_EXT_LDST.immext9 = (reloc->input >> 4) & 0x0f;
+  reloc->Type_EXT_LDST.simm4 = reloc->input & 0xf;
+  reloc->Type_EXT_LDST.immext9 = (reloc->input >> 4) & 0x3f;
 }
 
 ac_modifier_decode(lowextldst)
