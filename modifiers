@@ -1,61 +1,22 @@
+/*
+ *  Modifiers for SPARC16
+ */
 
-/////
-///// Modifiers for SPARCV8
-/////
-
-//ac_modifier_encode(low)
-//{
-//  reloc->Type_F3B.simm13 = reloc->input & 0x3FF;
-//
-////  reloc->output = reloc->input & 0x3FF;
-//}
-//
-//ac_modifier_decode(low)
-//{
-//}
-//
-//ac_modifier_encode(pcrel)
-//{
-//  reloc->output = (reloc->input - reloc->address) >> 2;
-//}
-//
-//ac_modifier_decode(pcrel)
-//{
-//  reloc->output = (reloc->input << 2) + reloc->address;
-//}
-//
-//ac_modifier_encode(high)
-//{
-//  reloc->Type_F2A.imm22 = reloc->input >> 10;
-//
-////  reloc->output = reloc->input >> 10;
-//}
-//
-//ac_modifier_decode(high)
-//{
-//}
-
-/////
-///// Modifiers for SPARC16
-/////
-
-/////
-///// --- Modifiers used for relocations
-////      + Used by the linker to fix the relocations
-/////////////////////////////////////////////////////////
-
-/// pcrel handling for callx, which works the same as 
-/// SPARC_WDISP30 relocation.
+/*
+ *  Generic Branch and call modifiers
+ */
 ac_modifier_encode(pcrelx)
 {
-  // The address is aligned on 4 byte boundary
-  long reladdr = reloc->address;
-
-  // If not aligned on 4 bytes boundary make it so.
-  if (reladdr % 4)
-    reladdr -= 2;
-
-  reloc->output = (reloc->input - reladdr) >> 2;
+  /*
+   * The address is aligned on 4 byte boundary
+   * NOTE: the compiler *must* issue a nop before each
+   * instruction containing a pcrelx relocation, cause
+   * the difference computed below must be 4 byte aligned
+   */
+  reloc->output = reloc->input - reloc->address;
+  if (reloc->output % 4 != 0)
+    reloc->error = 1;
+  reloc->ouput >>= 2;
 }
 
 ac_modifier_decode(pcrelx)
@@ -63,17 +24,112 @@ ac_modifier_decode(pcrelx)
   reloc->output = (reloc->input << 2) + reloc->address;
 }
 
-/// pcrel handling for Type_I
-ac_modifier_encode(pcreli)
+/// PC-relative relocation, used by formats I, I2, XCHG
+ac_modifier_encode(pcrel)
 {
   // The address is aligned on 2 byte boundary
   reloc->output = (reloc->input - reloc->address) >> 1;
 }
 
-ac_modifier_decode(pcreli)
+ac_modifier_decode(pcrel)
 {
   reloc->output = (reloc->input << 1) + reloc->address;
 }
+
+/*
+ *  PC-relative extended instructions aren't correctly encoded
+ *  by ArchC provided encoder functions. Provide our handcoded
+ *  ones.
+ */
+ac_modifier_encode(pcrelextcallx)
+{
+  /*
+   * The address is aligned on 4 byte boundary
+   * NOTE: the compiler *must* issue a nop before each
+   * instruction containing a pcrelx relocation, cause
+   * the difference computed below must be 4 byte aligned
+   */
+  reloc->output = reloc->input - reloc->address;
+  if (reloc->output % 4 != 0)
+    reloc->error = 1;
+  reloc->ouput >>= 2;
+  reloc->Type_EXT_I.simm11 = reloc->output & 0x7ff;
+  reloc->Type_EXT_I.immext11 = (reloc->output >> 11) & 0x7ff;
+  reloc->output = 0; // use Type_XXX info instead of "output"
+}
+
+ac_modifier_decode(pcrelextcallx)
+{
+  reloc->output = (reloc->input << 2) + reloc->address;
+}
+
+ac_modifier_encode(pcrelextbrx)
+{
+  /*
+   * The address is aligned on 4 byte boundary
+   * NOTE: the compiler *must* issue a nop before each
+   * instruction containing a pcrelx relocation, cause
+   * the difference computed below must be 4 byte aligned
+   */
+  reloc->output = reloc->input - reloc->address;
+  if (reloc->output % 4 != 0)
+    reloc->error = 1;
+  reloc->ouput >>= 2;
+  reloc->Type_EXT_I2.simm9 = reloc->output & 0x1ff;
+  reloc->Type_EXT_I2.immext11 = (reloc->output >> 9) & 0x7ff;
+  reloc->output = 0; // use Type_XXX info instead of "output"
+}
+
+ac_modifier_decode(pcrelextbrx)
+{
+  reloc->output = (reloc->input << 2) + reloc->address;
+}
+
+ac_modifier_encode(pcrelextii)
+{
+  // The address is aligned on 2 byte boundary
+  reloc->output = (reloc->input - reloc->address) >> 1;
+  reloc->Type_EXT_I2.simm8 = reloc->output & 0xff;
+  reloc->Type_EXT_I2.immext11 = (reloc->output >> 8) & 0x7ff;
+  reloc->output = 0; // use Type_XXX info instead of "output"
+}
+
+ac_modifier_decode(pcrelextii)
+{
+  reloc->output = (reloc->input << 1) + reloc->address;
+}
+
+ac_modifier_encode(pcrelexti)
+{
+  // The address is aligned on 2 byte boundary
+  reloc->output = (reloc->input - reloc->address) >> 1;
+  reloc->Type_EXT_I.simm10 = reloc->output & 0x3ff;
+  reloc->Type_EXT_I.immext11 = (reloc->output >> 10) & 0x7ff;
+  reloc->output = 0; // use Type_XXX info instead of "output"
+}
+
+ac_modifier_decode(pcrelexti)
+{
+  reloc->output = (reloc->input << 1) + reloc->address;
+}
+
+ac_modifier_encode(pcrelexticall)
+{
+  // The address is aligned on 2 byte boundary
+  reloc->output = (reloc->input - reloc->address) >> 1;
+  reloc->Type_EXT_I.simm11 = reloc->output & 0x7ff;
+  reloc->Type_EXT_I.immext11 = (reloc->output >> 11) & 0x7ff;
+  reloc->output = 0; // use Type_XXX info instead of "output"
+}
+
+ac_modifier_decode(pcrelexticall)
+{
+  reloc->output = (reloc->input << 1) + reloc->address;
+}
+
+/*
+ *  Pure immediate modifiers
+ */
 
 /// %lo handling for Type_RI
 ac_modifier_encode(lowri)

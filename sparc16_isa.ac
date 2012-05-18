@@ -235,9 +235,9 @@ AC_ISA(sparc16){
     sethi32.set_asm("sethi32 %imm, %reg", imm22, rd);
     sethi32.set_asm("sethi32 \%hi(%exp(highextri)), %reg", imm22, rd);
     sethi32.set_decoder(op=0x16);
-    
+
     /// Format XCHG
-    sparcv8bx.set_asm("sparcv8bx %exp(pcreli)", disp19);
+    sparcv8bx.set_asm("sparcv8bx %exp(pcrel)", disp19);
     sparcv8bx.set_decoder(op=0x2, op3=0x19);
 
     /// Format NOP
@@ -245,29 +245,29 @@ AC_ISA(sparc16){
     nop32.set_decoder(op=0x00, op2=0x04, imm22=0x0, rd=0x0);
 
     /// Format I and EXT_I
-    b16.set_asm("b16%[anul] %exp(pcreli)", an, simm10);
+    b16.set_asm("b16%[anul] %exp(pcrel)", an, simm10);
     b16.set_decoder(op=0x08);
-    e_b16.set_asm("eb16%[anul] %exp(pcreli)", an, immext11+simm10);
+    e_b16.set_asm("eb16%[anul] %exp(pcrelexti)", an, immext11+simm10);
     e_b16.set_decoder(opext=0x0b, op=0x08);
 
-    be16.set_asm("be16%[anul] %exp(pcreli)", an, simm10);
+    be16.set_asm("be16%[anul] %exp(pcrel)", an, simm10);
     be16.set_decoder(op=0x01);
-    e_be16.set_asm("ebe16%[anul] %exp(pcreli)", an, immext11+simm10);
+    e_be16.set_asm("ebe16%[anul] %exp(pcrelexti)", an, immext11+simm10);
     e_be16.set_decoder(opext=0x0b, op=0x01);
 
-    bne16.set_asm("bne16%[anul] %exp(pcreli)", an, simm10);
+    bne16.set_asm("bne16%[anul] %exp(pcrel)", an, simm10);
     bne16.set_decoder(op=0x09);
-    e_bne16.set_asm("ebne16%[anul] %exp(pcreli)", an, immext11+simm10);
+    e_bne16.set_asm("ebne16%[anul] %exp(pcrelexti)", an, immext11+simm10);
     e_bne16.set_decoder(opext=0x0b, op=0x09);
 
-    call16.set_asm("call16 %exp(pcreli)", simm11);
+    call16.set_asm("call16 %exp(pcrel)", simm11);
     call16.set_decoder(op=0x00);
-    e_call16.set_asm("ecall16 %exp(pcreli)", immext11+simm11);
+    e_call16.set_asm("ecall16 %exp(pcrelexticall)", immext11+simm11);
     e_call16.set_decoder(opext=0x0b, op=0x00);
 
     callx.set_asm("callx %exp(pcrelx)", simm11);
     callx.set_decoder(op=0x10);
-    e_callx.set_asm("ecallx %exp(pcrelx)", immext11+simm11);
+    e_callx.set_asm("ecallx %exp(pcrelextcallx)", immext11+simm11);
     e_callx.set_decoder(opext=0x0b, op=0x10);
 
     /// Format RI, EXT_RI
@@ -345,72 +345,72 @@ AC_ISA(sparc16){
 
     sparc16bx.set_asm("sparc16bx %exp(pcrelx)", simm9);
     sparc16bx.set_decoder(op=0x1e, op3=0x1);
-    e_sparc16bx.set_asm("esparc16bx %exp(pcrelx)", immext11+simm9);
+    e_sparc16bx.set_asm("esparc16bx %exp(pcrelextbrx)", immext11+simm9);
     e_sparc16bx.set_decoder(opext=0x0b, op=0x1e, op3=0x1);
 
-    bn16.set_asm("bn16%[anul] %exp(pcreli)", an, simm8);
+    bn16.set_asm("bn16%[anul] %exp(pcrel)", an, simm8);
     bn16.set_decoder(op=0x1c, cond=0x0);
-    e_bn16.set_asm("ebn16%[anul] %exp(pcreli)", an, immext11+simm8);
+    e_bn16.set_asm("ebn16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bn16.set_decoder(opext=0x0b, op=0x1c, cond=0x0);
 
-    bg16.set_asm("bg16%[anul] %exp(pcreli)", an, simm8);
+    bg16.set_asm("bg16%[anul] %exp(pcrel)", an, simm8);
     bg16.set_decoder(op=0x1e, cond=0x2);
-    e_bg16.set_asm("ebg16%[anul] %exp(pcreli)", an, immext11+simm8);
+    e_bg16.set_asm("ebg16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bg16.set_decoder(opext=0x0b, op=0x1e, cond=0x2);
 
-    ble16.set_asm("ble16%[anul] %exp(pcreli)", an, simm8);
+    ble16.set_asm("ble16%[anul] %exp(pcrel)", an, simm8);
     ble16.set_decoder(op=0x1c, cond=0x2);
-    e_ble16.set_asm("eble16%[anul] %exp(pcreli)", an, immext11+simm8);
+    e_ble16.set_asm("eble16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_ble16.set_decoder(opext=0x0b, op=0x1c, cond=0x2);
 
-    bge16.set_asm("bge16%[anul] %exp(pcreli)", an, simm8);
+    bge16.set_asm("bge16%[anul] %exp(pcrel)", an, simm8);
     bge16.set_decoder(op=0x1e, cond=0x3);
-    e_bge16.set_asm("ebge16%[anul] %exp(pcreli)", an, immext11+simm8);
+    e_bge16.set_asm("ebge16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bge16.set_decoder(opext=0x0b, op=0x1e, cond=0x3);
 
-    bl16.set_asm("bl16%[anul] %exp(pcreli)", an, simm8);
+    bl16.set_asm("bl16%[anul] %exp(pcrel)", an, simm8);
     bl16.set_decoder(op=0x1c, cond=0x3);
-    e_bl16.set_asm("ebl16%[anul] %exp(pcreli)", an, immext11+simm8);
+    e_bl16.set_asm("ebl16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bl16.set_decoder(opext=0x0b, op=0x1c, cond=0x3);
 
-    bgu16.set_asm("bgu16%[anul] %exp(pcreli)", an, simm8);
+    bgu16.set_asm("bgu16%[anul] %exp(pcrel)", an, simm8);
     bgu16.set_decoder(op=0x1f, cond=0x0);
-    e_bgu16.set_asm("ebgu16%[anul] %exp(pcreli)", an, immext11+simm8);
+    e_bgu16.set_asm("ebgu16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bgu16.set_decoder(opext=0x0b, op=0x1f, cond=0x0);
 
-    bleu16.set_asm("bleu16%[anul] %exp(pcreli)", an, simm8);
+    bleu16.set_asm("bleu16%[anul] %exp(pcrel)", an, simm8);
     bleu16.set_decoder(op=0x1d, cond=0x0);
-    e_bleu16.set_asm("ebleu16%[anul] %exp(pcreli)", an, immext11+simm8);
+    e_bleu16.set_asm("ebleu16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bleu16.set_decoder(opext=0x0b, op=0x1d, cond=0x0);
 
-    bcc16.set_asm("bcc16%[anul] %exp(pcreli)", an, simm8);
+    bcc16.set_asm("bcc16%[anul] %exp(pcrel)", an, simm8);
     bcc16.set_decoder(op=0x1f, cond=0x1);
-    e_bcc16.set_asm("ebcc16%[anul] %exp(pcreli)", an, immext11+simm8);
+    e_bcc16.set_asm("ebcc16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bcc16.set_decoder(opext=0x0b, op=0x1f, cond=0x1);
 
-    bcs16.set_asm("bcs16%[anul] %exp(pcreli)", an, simm8);
+    bcs16.set_asm("bcs16%[anul] %exp(pcrel)", an, simm8);
     bcs16.set_decoder(op=0x1d, cond=0x1);
-    e_bcs16.set_asm("ebcs16%[anul] %exp(pcreli)", an, immext11+simm8);
+    e_bcs16.set_asm("ebcs16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bcs16.set_decoder(opext=0x0b, op=0x1d, cond=0x1);
 
-    bpos16.set_asm("bpos16%[anul] %exp(pcreli)", an, simm8);
+    bpos16.set_asm("bpos16%[anul] %exp(pcrel)", an, simm8);
     bpos16.set_decoder(op=0x1f, cond=0x2);
-    e_bpos16.set_asm("ebpos16%[anul] %exp(pcreli)", an, immext11+simm8);
+    e_bpos16.set_asm("ebpos16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bpos16.set_decoder(opext=0x0b, op=0x1f, cond=0x2);
 
-    bneg16.set_asm("bneg16%[anul] %exp(pcreli)", an, simm8);
+    bneg16.set_asm("bneg16%[anul] %exp(pcrel)", an, simm8);
     bneg16.set_decoder(op=0x1d, cond=0x2);
-    e_bneg16.set_asm("ebneg16%[anul] %exp(pcreli)", an, immext11+simm8);
+    e_bneg16.set_asm("ebneg16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bneg16.set_decoder(opext=0x0b, op=0x1d, cond=0x2);
 
-    bvc16.set_asm("bvc16%[anul] %exp(pcreli)", an, simm8);
+    bvc16.set_asm("bvc16%[anul] %exp(pcrel)", an, simm8);
     bvc16.set_decoder(op=0x1f, cond=0x3);
-    e_bvc16.set_asm("ebvc16%[anul] %exp(pcreli)", an, immext11+simm8);
+    e_bvc16.set_asm("ebvc16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bvc16.set_decoder(opext=0x0b, op=0x1f, cond=0x3);
 
-    bvs16.set_asm("bvs16%[anul] %exp(pcreli)", an, simm8);
+    bvs16.set_asm("bvs16%[anul] %exp(pcrel)", an, simm8);
     bvs16.set_decoder(op=0x1d, cond=0x3);
-    e_bvs16.set_asm("ebvs16%[anul] %exp(pcreli)", an, immext11+simm8);
+    e_bvs16.set_asm("ebvs16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bvs16.set_decoder(opext=0x0b, op=0x1d, cond=0x3);
 
     /// Format RI2 and EXT_RI2
