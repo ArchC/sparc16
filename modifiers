@@ -16,7 +16,7 @@ ac_modifier_encode(pcrelx)
   reloc->output = reloc->input - reloc->address;
   if (reloc->output % 4 != 0)
     reloc->error = 1;
-  reloc->ouput >>= 2;
+  reloc->output >>= 2;
 }
 
 ac_modifier_decode(pcrelx)
@@ -52,7 +52,7 @@ ac_modifier_encode(pcrelextcallx)
   reloc->output = reloc->input - reloc->address;
   if (reloc->output % 4 != 0)
     reloc->error = 1;
-  reloc->ouput >>= 2;
+  reloc->output >>= 2;
   reloc->Type_EXT_I.simm11 = reloc->output & 0x7ff;
   reloc->Type_EXT_I.immext11 = (reloc->output >> 11) & 0x7ff;
   reloc->output = 0; // use Type_XXX info instead of "output"
@@ -74,7 +74,7 @@ ac_modifier_encode(pcrelextbrx)
   reloc->output = reloc->input - reloc->address;
   if (reloc->output % 4 != 0)
     reloc->error = 1;
-  reloc->ouput >>= 2;
+  reloc->output >>= 2;
   reloc->Type_EXT_I2.simm9 = reloc->output & 0x1ff;
   reloc->Type_EXT_I2.immext11 = (reloc->output >> 9) & 0x7ff;
   reloc->output = 0; // use Type_XXX info instead of "output"
