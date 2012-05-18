@@ -146,9 +146,10 @@ ac_modifier_decode(lowri)
 /// %lo handling for Type_EXT_RI
 ac_modifier_encode(lowextri)
 {
-  // The total imm is 13 bits, but relocation uses 10
+  // The total imm is 13 bits, but this should only use 10-bits
+  // because the upper ones already take 22-bits.
   reloc->Type_EXT_RI.simm8 = reloc->input & 0xff;
-  reloc->Type_EXT_RI.immext5 = (reloc->input >> 3) & 0x1f;
+  reloc->Type_EXT_RI.immext5 = (reloc->input >> 8) & 0x3;
 }
 
 ac_modifier_decode(lowextri)
