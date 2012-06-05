@@ -1,6 +1,7 @@
 /*
  *  Modifiers for SPARC16
  */
+#include <stdio.h>
 
 /*
  *  Generic Branch and call modifiers
@@ -14,8 +15,12 @@ ac_modifier_encode(pcrelx)
    * the difference computed below must be 4 byte aligned
    */
   reloc->output = reloc->input - reloc->address;
-  if (reloc->output % 4 != 0)
+  if (reloc->output % 4 != 0) {
+     fprintf(stderr,
+        "pcrelx: can't encode relocation: input (0x%08x), address(0x%08x), out(%d)\n",
+        reloc->input, reloc->address, reloc->output);
     reloc->error = 1;
+  }
   reloc->output >>= 2;
 }
 
@@ -50,8 +55,12 @@ ac_modifier_encode(pcrelextcallx)
    * the difference computed below must be 4 byte aligned
    */
   reloc->output = reloc->input - reloc->address;
-  if (reloc->output % 4 != 0)
+  if (reloc->output % 4 != 0) {
+     fprintf(stderr,
+        "pcrelextcallx: can't encode relocation: input (0x%08x), address(0x%08x), out(%d)\n",
+        reloc->input, reloc->address, reloc->output);
     reloc->error = 1;
+  }
   reloc->output >>= 2;
   reloc->Type_EXT_I.simm11 = reloc->output & 0x7ff;
   reloc->Type_EXT_I.immext11 = (reloc->output >> 11) & 0x7ff;
@@ -72,8 +81,12 @@ ac_modifier_encode(pcrelextbrx)
    * the difference computed below must be 4 byte aligned
    */
   reloc->output = reloc->input - reloc->address;
-  if (reloc->output % 4 != 0)
+  if (reloc->output % 4 != 0) {
+     fprintf(stderr,
+        "pcrelextbrx: can't encode relocation: input (0x%08x), address(0x%08x), out(%d)\n",
+        reloc->input, reloc->address, reloc->output);
     reloc->error = 1;
+  }
   reloc->output >>= 2;
   reloc->Type_EXT_I2.simm9 = reloc->output & 0x1ff;
   reloc->Type_EXT_I2.immext11 = (reloc->output >> 9) & 0x7ff;
