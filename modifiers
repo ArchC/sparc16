@@ -3,6 +3,39 @@
  */
 #include <stdio.h>
 
+static int sign_extend(int x, int len)
+{
+    len = 32 - len;
+    return (x << len) >> len;
+}
+
+static void check_signed_overflow(int imm, int size, int *error, char *reloc_name)
+{
+  int low = 0, high = 0;
+  unsigned int min = 1U << (size - 1);
+  unsigned int max = ((1U << (size - 1))-1);
+
+  low = sign_extend(min, size);
+  high = sign_extend(max, size);
+
+  if (imm < low || imm > high) {
+    fprintf(stderr, "%s: signed overflow, imm_size=%d, reloc_output=%d\n",
+            reloc_name, size, imm);
+    *error = 1;
+  }
+}
+
+static void check_alignment(int imm, int align, int *error, char *reloc_name)
+{
+  /* alignment must be given in bytes */
+  if (imm % align != 0) {
+    fprintf(stderr,
+            "%s: can't encode relocation, alignment of %d bytes mismatch for imm=%d\n",
+            reloc_name, align, imm);
+    *error = 1;
+  }
+}
+
 /*
  *  Generic Branch and call modifiers
  */
@@ -15,13 +48,9 @@ ac_modifier_encode(pcrelx)
    * the difference computed below must be 4 byte aligned
    */
   reloc->output = reloc->input - reloc->address;
-  if (reloc->output % 4 != 0) {
-     fprintf(stderr,
-        "pcrelx: can't encode relocation: input (0x%08x), address(0x%08x), out(%d)\n",
-        reloc->input, reloc->address, reloc->output);
-    reloc->error = 1;
-  }
-  reloc->output >>= 2;
+  check_alignment((int)reloc->output, 4, &reloc->error, "pcrelx");
+  reloc->output = (int)reloc->output >> 2;
+  check_signed_overflow(reloc->output, 9, &reloc->error, "pcrelx");
 }
 
 ac_modifier_decode(pcrelx)
@@ -38,13 +67,9 @@ ac_modifier_encode(pcrelcallx)
    * the difference computed below must be 4 byte aligned
    */
   reloc->output = reloc->input - reloc->address;
-  if (reloc->output % 4 != 0) {
-     fprintf(stderr,
-        "pcrelcallx: can't encode relocation: input (0x%08x), address(0x%08x), out(%d)\n",
-        reloc->input, reloc->address, reloc->output);
-    reloc->error = 1;
-  }
-  reloc->output >>= 2;
+  check_alignment((int)reloc->output, 4, &reloc->error, "pcrelcallx");
+  reloc->output = (int)reloc->output >> 2;
+  check_signed_overflow(reloc->output, 11, &reloc->error, "pcrelx");
 }
 
 ac_modifier_decode(pcrelcallx)
@@ -52,11 +77,12 @@ ac_modifier_decode(pcrelcallx)
   reloc->output = (reloc->input << 2) + reloc->address;
 }
 
-/// PC-relative relocation, used by formats I, I2, XCHG
+/// PC-relative relocation, used by formats I, I2
 ac_modifier_encode(pcreli)
 {
   // The address is aligned on 2 byte boundary
-  reloc->output = (reloc->input - reloc->address) >> 1;
+  reloc->output = (int)(reloc->input - reloc->address) >> 1;
+  check_signed_overflow(reloc->output, 10, &reloc->error, "pcreli");
 }
 
 ac_modifier_decode(pcreli)
@@ -67,7 +93,8 @@ ac_modifier_decode(pcreli)
 ac_modifier_encode(pcrelicall)
 {
   // The address is aligned on 2 byte boundary
-  reloc->output = (reloc->input - reloc->address) >> 1;
+  reloc->output = (int)(reloc->input - reloc->address) >> 1;
+  check_signed_overflow(reloc->output, 11, &reloc->error, "pcrelicall");
 }
 
 ac_modifier_decode(pcrelicall)
@@ -78,7 +105,8 @@ ac_modifier_decode(pcrelicall)
 ac_modifier_encode(pcrelii)
 {
   // The address is aligned on 2 byte boundary
-  reloc->output = (reloc->input - reloc->address) >> 1;
+  reloc->output = (int)(reloc->input - reloc->address) >> 1;
+  check_signed_overflow(reloc->output, 8, &reloc->error, "pcrelii");
 }
 
 ac_modifier_decode(pcrelii)
@@ -100,13 +128,9 @@ ac_modifier_encode(pcrelextcallx)
    * the difference computed below must be 4 byte aligned
    */
   reloc->output = reloc->input - reloc->address;
-  if (reloc->output % 4 != 0) {
-     fprintf(stderr,
-        "pcrelextcallx: can't encode relocation: input (0x%08x), address(0x%08x), out(%d)\n",
-        reloc->input, reloc->address, reloc->output);
-    reloc->error = 1;
-  }
-  reloc->output >>= 2;
+  check_alignment((int)reloc->output, 4, &reloc->error, "pcrelextcallx");
+  reloc->output = (int)reloc->output >> 2;
+  check_signed_overflow(reloc->output, 22, &reloc->error, "pcrelextcallx");
   reloc->Type_EXT_I.simm11 = reloc->output & 0x7ff;
   reloc->Type_EXT_I.immext11 = (reloc->output >> 11) & 0x7ff;
   reloc->output = 0; // use Type_XXX info instead of "output"
@@ -126,13 +150,9 @@ ac_modifier_encode(pcrelextbrx)
    * the difference computed below must be 4 byte aligned
    */
   reloc->output = reloc->input - reloc->address;
-  if (reloc->output % 4 != 0) {
-     fprintf(stderr,
-        "pcrelextbrx: can't encode relocation: input (0x%08x), address(0x%08x), out(%d)\n",
-        reloc->input, reloc->address, reloc->output);
-    reloc->error = 1;
-  }
-  reloc->output >>= 2;
+  check_alignment((int)reloc->output, 4, &reloc->error, "pcrelextbrx");
+  reloc->output = (int)reloc->output >> 2;
+  check_signed_overflow(reloc->output, 20, &reloc->error, "pcrelextbrx");
   reloc->Type_EXT_I2.simm9 = reloc->output & 0x1ff;
   reloc->Type_EXT_I2.immext11 = (reloc->output >> 9) & 0x7ff;
   reloc->output = 0; // use Type_XXX info instead of "output"
@@ -146,9 +166,10 @@ ac_modifier_decode(pcrelextbrx)
 ac_modifier_encode(pcrelextii)
 {
   // The address is aligned on 2 byte boundary
-  reloc->output = (reloc->input - reloc->address) >> 1;
+  reloc->output = (int)(reloc->input - reloc->address) >> 1;
   reloc->Type_EXT_I2.simm8 = reloc->output & 0xff;
   reloc->Type_EXT_I2.immext11 = (reloc->output >> 8) & 0x7ff;
+  check_signed_overflow(reloc->output, 19, &reloc->error, "pcrelextii");
   reloc->output = 0; // use Type_XXX info instead of "output"
 }
 
@@ -160,9 +181,10 @@ ac_modifier_decode(pcrelextii)
 ac_modifier_encode(pcrelexti)
 {
   // The address is aligned on 2 byte boundary
-  reloc->output = (reloc->input - reloc->address) >> 1;
+  reloc->output = (int)(reloc->input - reloc->address) >> 1;
   reloc->Type_EXT_I.simm10 = reloc->output & 0x3ff;
   reloc->Type_EXT_I.immext11 = (reloc->output >> 10) & 0x7ff;
+  check_signed_overflow(reloc->output, 21, &reloc->error, "pcrelexti");
   reloc->output = 0; // use Type_XXX info instead of "output"
 }
 
@@ -174,9 +196,10 @@ ac_modifier_decode(pcrelexti)
 ac_modifier_encode(pcrelexticall)
 {
   // The address is aligned on 2 byte boundary
-  reloc->output = (reloc->input - reloc->address) >> 1;
+  reloc->output = (int)(reloc->input - reloc->address) >> 1;
   reloc->Type_EXT_I.simm11 = reloc->output & 0x7ff;
   reloc->Type_EXT_I.immext11 = (reloc->output >> 11) & 0x7ff;
+  check_signed_overflow(reloc->output, 22, &reloc->error, "pcrelexticall");
   reloc->output = 0; // use Type_XXX info instead of "output"
 }
 
