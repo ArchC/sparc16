@@ -29,14 +29,59 @@ ac_modifier_decode(pcrelx)
   reloc->output = (reloc->input << 2) + reloc->address;
 }
 
+ac_modifier_encode(pcrelcallx)
+{
+  /*
+   * The address is aligned on 4 byte boundary
+   * NOTE: the compiler *must* issue a nop before each
+   * instruction containing a pcrelcallx relocation, cause
+   * the difference computed below must be 4 byte aligned
+   */
+  reloc->output = reloc->input - reloc->address;
+  if (reloc->output % 4 != 0) {
+     fprintf(stderr,
+        "pcrelcallx: can't encode relocation: input (0x%08x), address(0x%08x), out(%d)\n",
+        reloc->input, reloc->address, reloc->output);
+    reloc->error = 1;
+  }
+  reloc->output >>= 2;
+}
+
+ac_modifier_decode(pcrelcallx)
+{
+  reloc->output = (reloc->input << 2) + reloc->address;
+}
+
 /// PC-relative relocation, used by formats I, I2, XCHG
-ac_modifier_encode(pcrel)
+ac_modifier_encode(pcreli)
 {
   // The address is aligned on 2 byte boundary
   reloc->output = (reloc->input - reloc->address) >> 1;
 }
 
-ac_modifier_decode(pcrel)
+ac_modifier_decode(pcreli)
+{
+  reloc->output = (reloc->input << 1) + reloc->address;
+}
+
+ac_modifier_encode(pcrelicall)
+{
+  // The address is aligned on 2 byte boundary
+  reloc->output = (reloc->input - reloc->address) >> 1;
+}
+
+ac_modifier_decode(pcrelicall)
+{
+  reloc->output = (reloc->input << 1) + reloc->address;
+}
+
+ac_modifier_encode(pcrelii)
+{
+  // The address is aligned on 2 byte boundary
+  reloc->output = (reloc->input - reloc->address) >> 1;
+}
+
+ac_modifier_decode(pcrelii)
 {
   reloc->output = (reloc->input << 1) + reloc->address;
 }
@@ -51,7 +96,7 @@ ac_modifier_encode(pcrelextcallx)
   /*
    * The address is aligned on 4 byte boundary
    * NOTE: the compiler *must* issue a nop before each
-   * instruction containing a pcrelx relocation, cause
+   * instruction containing a pcrelextcallx relocation, cause
    * the difference computed below must be 4 byte aligned
    */
   reloc->output = reloc->input - reloc->address;
@@ -77,7 +122,7 @@ ac_modifier_encode(pcrelextbrx)
   /*
    * The address is aligned on 4 byte boundary
    * NOTE: the compiler *must* issue a nop before each
-   * instruction containing a pcrelx relocation, cause
+   * instruction containing a pcrelextbrx relocation, cause
    * the difference computed below must be 4 byte aligned
    */
   reloc->output = reloc->input - reloc->address;
