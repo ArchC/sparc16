@@ -227,10 +227,10 @@ ac_modifier_decode(lowri)
 /// %lo handling for Type_EXT_RI
 ac_modifier_encode(lowextri)
 {
-  // The total imm is 13 bits, but this should only use 10-bits
-  // because the upper ones already take 22-bits.
+  // The total imm is 13 bits, but relocation uses 10.
+  reloc->input &= 0x3ff;
   reloc->Type_EXT_RI.simm8 = reloc->input & 0xff;
-  reloc->Type_EXT_RI.immext5 = (reloc->input >> 8) & 0x3;
+  reloc->Type_EXT_RI.immext5 = (reloc->input >> 8) & 0x1f;
 }
 
 ac_modifier_decode(lowextri)
@@ -292,9 +292,10 @@ ac_modifier_decode(lowrris)
 /// %lo handling for Type_EXT_RRI
 ac_modifier_encode(lowextrri)
 {
-  // The total imm is 13 bits, but relocation uses 10
+  // The total imm is 13 bits, but relocation uses 10.
+  reloc->input &= 0x3ff;
   reloc->Type_EXT_RRI.simm5 = reloc->input & 0x1f;
-  reloc->Type_EXT_RRI.immext8 = (reloc->input >> 5) & 0x1f;
+  reloc->Type_EXT_RRI.immext8 = (reloc->input >> 5) & 0xff;
 }
 
 ac_modifier_decode(lowextrri)
@@ -303,6 +304,26 @@ ac_modifier_decode(lowextrri)
   unsigned int hi = ((insn >> 16) & 0xff) << 5;
   unsigned int low = ((insn >> 6) & 0x1f);
   reloc->output = (int)(hi | low);
+}
+
+ac_modifier_encode(ldstlowextrri)
+{
+  // The total imm is 13 bits, but relocation uses 10.
+  reloc->input &= 0x3ff;
+
+  // Must be 4-byte aligned
+  check_alignment(reloc->input, 4, &reloc->error, "ldstlowextrri");
+  reloc->input = (int)(reloc->input) >> 2;
+  reloc->Type_EXT_RRI.simm5 = reloc->input & 0x1f;
+  reloc->Type_EXT_RRI.immext8 = (reloc->input >> 5) & 0x1f;
+}
+
+ac_modifier_decode(ldstlowextrri)
+{
+  unsigned int insn = (unsigned)reloc->addend;
+  unsigned int hi = ((insn >> 16) & 0xff) << 5;
+  unsigned int low = ((insn >> 6) & 0x1f);
+  reloc->output = (int)(hi | low) << 2;
 }
 
 /// %lo handling for Type_RI2
@@ -318,19 +339,24 @@ ac_modifier_decode(lowriri)
 }
 
 /// %lo handling for Type_EXT_RI2
-ac_modifier_encode(lowextriri)
+ac_modifier_encode(ldstlowextriri)
 {
-  // The total imm is 13 bits, but relocation uses 10
+  // The total imm is 13 bits, but relocation uses 10.
+  reloc->input &= 0x3ff;
+
+  // Must be 4-byte aligned
+  check_alignment(reloc->input, 4, &reloc->error, "lowextldstd");
+  reloc->input = (int)reloc->input >> 2;
   reloc->Type_EXT_RI2.simm5 = reloc->input & 0x1f;
   reloc->Type_EXT_RI2.immext8 = (reloc->input >> 5) & 0x1f;
 }
 
-ac_modifier_decode(lowextriri)
+ac_modifier_decode(ldstlowextriri)
 {
   unsigned int insn = (unsigned)reloc->addend;
   unsigned int hi = ((insn >> 16) & 0xff) << 5;
   unsigned int low = (insn >> 3) & 0x1f;
-  reloc->output = (int)(hi | low);
+  reloc->output = (int)(hi | low) << 2;
 }
 
 /// %lo handling for Type_RRI2
@@ -348,9 +374,10 @@ ac_modifier_decode(lowrrirri)
 /// %lo handling for Type_EXT_RRI2
 ac_modifier_encode(lowextrrirri)
 {
-  // The total imm is 13 bits, but relocation uses 10
+  // The total imm is 13 bits, but relocation uses 10.
+  reloc->input &= 0x3ff;
   reloc->Type_EXT_RRI2.simm2 = reloc->input & 0x3;
-  reloc->Type_EXT_RRI2.immext11 = (reloc->input >> 2) & 0xff;
+  reloc->Type_EXT_RRI2.immext11 = (reloc->input >> 2) & 0x7ff;
 }
 
 ac_modifier_decode(lowextrrirri)
@@ -361,21 +388,61 @@ ac_modifier_decode(lowextrrirri)
   reloc->output = (int)(hi | low);
 }
 
-
 /// %lo handling for Type_EXT_LDST
-ac_modifier_encode(lowextldst)
+ac_modifier_encode(lowextldstb)
 {
-  // The total imm is 13 bits, but relocation uses 10
+  // The total imm is 13 bits, but relocation uses 10.
+  reloc->input &= 0x3ff;
   reloc->Type_EXT_LDST.simm4 = reloc->input & 0xf;
-  reloc->Type_EXT_LDST.immext9 = (reloc->input >> 4) & 0x3f;
+  reloc->Type_EXT_LDST.immext9 = (reloc->input >> 4) & 0x1ff;
 }
 
-ac_modifier_decode(lowextldst)
+ac_modifier_decode(lowextldstb)
 {
   unsigned int insn = (unsigned)reloc->addend;
   unsigned int hi = ((insn >> 16) & 0x1ff) << 4;
   unsigned int low = ((insn >> 6) & 0x0f);
   reloc->output = (int)(hi | low);
+}
+
+ac_modifier_encode(lowextldsth)
+{
+  // The total imm is 13 bits, but relocation uses 10.
+  reloc->input &= 0x3ff;
+
+  // Must be 2-byte aligned
+  check_alignment(reloc->input, 2, &reloc->error, "lowextldsth");
+  reloc->input = (int)reloc->input >> 1;
+  reloc->Type_EXT_LDST.simm4 = reloc->input & 0xf;
+  reloc->Type_EXT_LDST.immext9 = (reloc->input >> 4) & 0x1ff;
+}
+
+ac_modifier_decode(lowextldsth)
+{
+  unsigned int insn = (unsigned)reloc->addend;
+  unsigned int hi = ((insn >> 16) & 0x1ff) << 4;
+  unsigned int low = ((insn >> 6) & 0x0f);
+  reloc->output = (int)(hi | low) << 1;
+}
+
+ac_modifier_encode(lowextldstd)
+{
+  // The total imm is 13 bits, but relocation uses 10.
+  reloc->input &= 0x3ff;
+
+  // Must be 3-byte aligned
+  check_alignment(reloc->input, 8, &reloc->error, "lowextldstd");
+  reloc->input = (int)reloc->input >> 3;
+  reloc->Type_EXT_LDST.simm4 = reloc->input & 0xf;
+  reloc->Type_EXT_LDST.immext9 = (reloc->input >> 4) & 0x3ff;
+}
+
+ac_modifier_decode(lowextldstd)
+{
+  unsigned int insn = (unsigned)reloc->addend;
+  unsigned int hi = ((insn >> 16) & 0x1ff) << 4;
+  unsigned int low = ((insn >> 6) & 0x0f);
+  reloc->output = (int)(hi | low) << 3;
 }
 
 /// %lo handling for Type_LDST

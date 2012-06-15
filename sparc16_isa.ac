@@ -101,7 +101,7 @@ AC_ISA(sparc16){
 
   ac_format Type_EXT_I    = "%opext:5 %immext11:11:s %op:5 [ %simm11:11:s | %an:1 %simm10:10:s ]";
   ac_format Type_EXT_RI   = "%opext:5 [ %immext11:11 | %unused:6 %immext5:5:s ] %op:5 [ %imm8:8 | %simm8:8:s ] %rd:3";
-  ac_format Type_EXT_RRI  = "%opext:5 [ %immext11:11:s | %unused:3 %immext8:8:s ] %op:5 %simm5:5:s %rs:3 %rd:3";
+  ac_format Type_EXT_RRI  = "%opext:5 %unused:3 %immext8:8:s %op:5 %simm5:5:s %rs:3 %rd:3";
   ac_format Type_EXT_I2   = "%opext:5 [ %immext11:11:s | %unused:7 %immext4:4:s ] %op:5 [ %cond:2 %an:1 %simm8:8:s | %op2:2 %t:1 %reg32:5 %reg8:3 | %op3:2 %simm9:9:s ]";
   ac_format Type_EXT_RI2  = "%opext:5 [ %immext11:11:s | %unused:3 %immext8:8:s ] %op:5 %op2:3 %simm5:5 %rd:3";
   ac_format Type_EXT_RRI2 = "%opext:5 %immext11:11:s %op:5 %op2:3 %simm2:2 %rs:3 %rd:3";
@@ -301,7 +301,7 @@ AC_ISA(sparc16){
     ld16.set_asm("ld16 [%reg + %imm], %reg", rs, simm5, rd);
     ld16.set_asm("ld16 [%imm + %reg], %reg", simm5, rs, rd);
     ld16.set_decoder(op=0x18);
-    e_ld16.set_asm("eld16 [%reg + \%lo(%exp(lowextrri))], %reg", rs, immext8+simm5, rd);
+    e_ld16.set_asm("eld16 [%reg + \%lo(%exp(ldstlowextrri))], %reg", rs, immext8+simm5, rd);
     e_ld16.set_asm("eld16 [%reg + %imm], %reg", rs, immext8+simm5, rd);
     e_ld16.set_asm("eld16 [%imm + %reg], %reg", immext8+simm5, rs, rd);
     e_ld16.set_decoder(opext=0x0b, op=0x18);
@@ -310,7 +310,7 @@ AC_ISA(sparc16){
     st16.set_asm("st16 %reg, [%reg + %imm]", rd, rs, simm5);
     st16.set_asm("st16 %reg, [%imm + %reg]", rd, simm5, rs);
     st16.set_decoder(op=0xc);
-    e_st16.set_asm("est16 %reg, [%reg + \%lo(%exp(lowextrri))]", rd, rs, immext8+simm5);
+    e_st16.set_asm("est16 %reg, [%reg + \%lo(%exp(ldstlowextrri))]", rd, rs, immext8+simm5);
     e_st16.set_asm("est16 %reg, [%reg + %imm]", rd, rs, immext8+simm5);
     e_st16.set_asm("est16 %reg, [%imm + %reg]", rd, immext8+simm5, rs);
     e_st16.set_decoder(opext=0x0b, op=0xc);
@@ -418,14 +418,14 @@ AC_ISA(sparc16){
     stfp.set_asm("stfp %reg, [\%lo(%exp(lowriri))]", rd, simm5);
     stfp.set_asm("stfp %reg, [%imm]", rd, simm5);
     stfp.set_decoder(op=0x13, op2=0x1);
-    e_stfp.set_asm("estfp %reg, [\%lo(%exp(lowextriri))]", rd, immext8+simm5);
+    e_stfp.set_asm("estfp %reg, [\%lo(%exp(ldstlowextriri))]", rd, immext8+simm5);
     e_stfp.set_asm("estfp %reg, [%imm]", rd, immext8+simm5);
     e_stfp.set_decoder(opext=0x0b, op=0x13, op2=0x1);
 
     ldfp.set_asm("ldfp [\%lo(%exp(lowriri))], %reg", simm5, rd);
     ldfp.set_asm("ldfp [%imm], %reg", simm5, rd);
     ldfp.set_decoder(op=0x13, op2=0x2);
-    e_ldfp.set_asm("eldfp [\%lo(%exp(lowextriri))], %reg", immext8+simm5, rd);
+    e_ldfp.set_asm("eldfp [\%lo(%exp(ldstlowextriri))], %reg", immext8+simm5, rd);
     e_ldfp.set_asm("eldfp [%imm], %reg", immext8+simm5, rd);
     e_ldfp.set_decoder(opext=0x0b, op=0x13, op2=0x2);
 
@@ -437,14 +437,14 @@ AC_ISA(sparc16){
     stsp.set_asm("stsp %reg, [\%lo(%exp(lowriri))]", rd, simm5);
     stsp.set_asm("stsp %reg, [%imm]", rd, simm5);
     stsp.set_decoder(op=0x13, op2=0x4);
-    e_stsp.set_asm("estsp %reg, [\%lo(%exp(lowextriri))]", rd, immext8+simm5);
+    e_stsp.set_asm("estsp %reg, [\%lo(%exp(ldstlowextriri))]", rd, immext8+simm5);
     e_stsp.set_asm("estsp %reg, [%imm]", rd, immext8+simm5);
     e_stsp.set_decoder(opext=0x0b, op=0x13, op2=0x4);
 
     ldsp.set_asm("ldsp [\%lo(%exp(lowriri))], %reg", simm5, rd);
     ldsp.set_asm("ldsp [%imm], %reg", simm5, rd);
     ldsp.set_decoder(op=0x13, op2=0x5);
-    e_ldsp.set_asm("eldsp [\%lo(%exp(lowextriri))], %reg", immext8+simm5, rd);
+    e_ldsp.set_asm("eldsp [\%lo(%exp(ldstlowextriri))], %reg", immext8+simm5, rd);
     e_ldsp.set_asm("eldsp [%imm], %reg", immext8+simm5, rd);
     e_ldsp.set_decoder(opext=0x0b, op=0x13, op2=0x5);
 
@@ -717,7 +717,7 @@ AC_ISA(sparc16){
     ldd16.set_asm("ldd16 [%reg + %imm], %reg", rs, simm4, rd);
     ldd16.set_asm("ldd16 [%imm + %reg], %reg", simm4, rs, rd);
     ldd16.set_decoder(op=0x1b, op2=0x0);
-    e_ldd16.set_asm("eldd16 [%reg + \%lo(%exp(lowextldst))], %reg", rs, immext9+simm4, rd);
+    e_ldd16.set_asm("eldd16 [%reg + \%lo(%exp(lowextldstd))], %reg", rs, immext9+simm4, rd);
     e_ldd16.set_asm("eldd16 [%reg + %imm], %reg", rs, immext9+simm4, rd);
     e_ldd16.set_asm("eldd16 [%imm + %reg], %reg", immext9+simm4, rs, rd);
     e_ldd16.set_decoder(opext=0x0b, op=0x1b, op2=0x0);
@@ -726,7 +726,7 @@ AC_ISA(sparc16){
     std16.set_asm("std16 %reg, [%reg + %imm]", rd, rs, simm4);
     std16.set_asm("std16 %reg, [%imm + %reg]", rd, simm4, rs);
     std16.set_decoder(op=0x1b, op2=0x1);
-    e_std16.set_asm("estd16 %reg, [%reg + \%lo(%exp(lowextldst))]", rd, rs, immext9+simm4);
+    e_std16.set_asm("estd16 %reg, [%reg + \%lo(%exp(lowextldstd))]", rd, rs, immext9+simm4);
     e_std16.set_asm("estd16 %reg, [%reg + %imm]", rd, rs, immext9+simm4);
     e_std16.set_asm("estd16 %reg, [%imm + %reg]", rd, immext9+simm4, rs);
     e_std16.set_decoder(opext=0x0b, op=0x1b, op2=0x1);
@@ -735,7 +735,7 @@ AC_ISA(sparc16){
     stb16.set_asm("stb16 %reg, [%reg + %imm]", rd, rs, simm4);
     stb16.set_asm("stb16 %reg, [%imm + %reg]", rd, simm4, rs);
     stb16.set_decoder(op=0x0f, op2=0x0);
-    e_stb16.set_asm("estb16 %reg, [%reg + \%lo(%exp(lowextldst))]", rd, rs, immext9+simm4);
+    e_stb16.set_asm("estb16 %reg, [%reg + \%lo(%exp(lowextldstb))]", rd, rs, immext9+simm4);
     e_stb16.set_asm("estb16 %reg, [%reg + %imm]", rd, rs, immext9+simm4);
     e_stb16.set_asm("estb16 %reg, [%imm + %reg]", rd, immext9+simm4, rs);
     e_stb16.set_decoder(opext=0x0b, op=0x0f, op2=0x0);
@@ -744,7 +744,7 @@ AC_ISA(sparc16){
     sth16.set_asm("sth16 %reg, [%reg + %imm]", rd, rs, simm4);
     sth16.set_asm("sth16 %reg, [%imm + %reg]", rd, simm4, rs);
     sth16.set_decoder(op=0x0f, op2=0x1);
-    e_sth16.set_asm("esth16 %reg, [%reg + \%lo(%exp(lowextldst))]", rd, rs, immext9+simm4);
+    e_sth16.set_asm("esth16 %reg, [%reg + \%lo(%exp(lowextldsth))]", rd, rs, immext9+simm4);
     e_sth16.set_asm("esth16 %reg, [%reg + %imm]", rd, rs, immext9+simm4);
     e_sth16.set_asm("esth16 %reg, [%imm + %reg]", rd, immext9+simm4, rs);
     e_sth16.set_decoder(opext=0x0b, op=0x0f, op2=0x1);
@@ -753,7 +753,7 @@ AC_ISA(sparc16){
     ldsb16.set_asm("ldsb16 [%reg + %imm], %reg", rs, simm4, rd);
     ldsb16.set_asm("ldsb16 [%imm + %reg], %reg", simm4, rs, rd);
     ldsb16.set_decoder(op=0x14, op2=0x0);
-    e_ldsb16.set_asm("eldsb16 [%reg + \%lo(%exp(lowextldst))], %reg", rs, immext9+simm4, rd);
+    e_ldsb16.set_asm("eldsb16 [%reg + \%lo(%exp(lowextldstb))], %reg", rs, immext9+simm4, rd);
     e_ldsb16.set_asm("eldsb16 [%reg + %imm], %reg", rs, immext9+simm4, rd);
     e_ldsb16.set_asm("eldsb16 [%imm + %reg], %reg", immext9+simm4, rs, rd);
     e_ldsb16.set_decoder(opext=0x0b, op=0x14, op2=0x0);
@@ -762,7 +762,7 @@ AC_ISA(sparc16){
     ldub16.set_asm("ldub16 [%reg + %imm], %reg", rs, simm4, rd);
     ldub16.set_asm("ldub16 [%imm + %reg], %reg", simm4, rs, rd);
     ldub16.set_decoder(op=0x14, op2=0x1);
-    e_ldub16.set_asm("eldub16 [%reg + \%lo(%exp(lowextldst))], %reg", rs, immext9+simm4, rd);
+    e_ldub16.set_asm("eldub16 [%reg + \%lo(%exp(lowextldstb))], %reg", rs, immext9+simm4, rd);
     e_ldub16.set_asm("eldub16 [%reg + %imm], %reg", rs, immext9+simm4, rd);
     e_ldub16.set_asm("eldub16 [%imm + %reg], %reg", immext9+simm4, rs, rd);
     e_ldub16.set_decoder(opext=0x0b, op=0x14, op2=0x1);
@@ -772,7 +772,7 @@ AC_ISA(sparc16){
     ldsh16.set_asm("ldsh16 [%reg + %imm], %reg", rs, simm4, rd);
     ldsh16.set_asm("ldsh16 [%imm + %reg], %reg", simm4, rs, rd);
     ldsh16.set_decoder(op=0x04, op2=0x0);
-    e_ldsh16.set_asm("eldsh16 [%reg + \%lo(%exp(lowextldst))], %reg", rs, immext9+simm4, rd);
+    e_ldsh16.set_asm("eldsh16 [%reg + \%lo(%exp(lowextldsth))], %reg", rs, immext9+simm4, rd);
     e_ldsh16.set_asm("eldsh16 [%reg + %imm], %reg", rs, immext9+simm4, rd);
     e_ldsh16.set_asm("eldsh16 [%imm + %reg], %reg", immext9+simm4, rs, rd);
     e_ldsh16.set_decoder(opext=0x0b, op=0x04, op2=0x0);
@@ -782,7 +782,7 @@ AC_ISA(sparc16){
     lduh16.set_asm("lduh16 [%reg + %imm], %reg", rs, simm4, rd);
     lduh16.set_asm("lduh16 [%imm + %reg], %reg", simm4, rs, rd);
     lduh16.set_decoder(op=0x04, op2=0x1);
-    e_lduh16.set_asm("elduh16 [%reg + \%lo(%exp(lowextldst))], %reg", rs, immext9+simm4, rd);
+    e_lduh16.set_asm("elduh16 [%reg + \%lo(%exp(lowextldsth))], %reg", rs, immext9+simm4, rd);
     e_lduh16.set_asm("elduh16 [%reg + %imm], %reg", rs, immext9+simm4, rd);
     e_lduh16.set_asm("elduh16 [%imm + %reg], %reg", immext9+simm4, rs, rd);
     e_lduh16.set_decoder(opext=0x0b, op=0x04, op2=0x1);
