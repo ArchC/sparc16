@@ -497,35 +497,35 @@ AC_ISA(sparc16){
     e_umul16.set_decoder(opext=0x0b, op=0x1A, op2=0x02);
 
     udiv16.set_asm("udiv16 %reg, \%lo(%exp(lowrrirri)), %reg", rs, simm2, rd);
-    udiv16.set_asm("udiv16 %reg, %imm, %reg", rd, simm2, rs);
+    udiv16.set_asm("udiv16 %reg, %imm, %reg", rs, simm2, rd);
     udiv16.set_decoder(op=0x1A, op2=0x03);
     e_udiv16.set_asm("eudiv16 %reg, \%lo(%exp(lowextrrirri)), %reg", rs, immext11+simm2, rd);
     e_udiv16.set_asm("eudiv16 %reg, %imm, %reg", rs, immext11+simm2, rd);
     e_udiv16.set_decoder(opext=0x0b, op=0x1A, op2=0x03);
 
     or16.set_asm("or16 %reg, \%lo(%exp(lowrrirri)), %reg", rs, simm2, rd);
-    or16.set_asm("or16 %reg, %imm, %reg", rd, simm2, rs);
+    or16.set_asm("or16 %reg, %imm, %reg", rs, simm2, rd);
     or16.set_decoder(op=0x1A, op2=0x04);
     e_or16.set_asm("eor16 %reg, \%lo(%exp(lowextrrirri)), %reg", rs, immext11+simm2, rd);
     e_or16.set_asm("eor16 %reg, %imm, %reg", rs, immext11+simm2, rd);
     e_or16.set_decoder(opext=0x0b, op=0x1A, op2=0x04);
 
     xor16.set_asm("xor16 %reg, \%lo(%exp(lowrrirri)), %reg", rs, simm2, rd);
-    xor16.set_asm("xor16 %reg, %imm, %reg", rd, simm2, rs);
+    xor16.set_asm("xor16 %reg, %imm, %reg", rs, simm2, rd);
     xor16.set_decoder(op=0x1A, op2=0x05);
     e_xor16.set_asm("exor16 %reg, \%lo(%exp(lowextrrirri)), %reg", rs, immext11+simm2, rd);
     e_xor16.set_asm("exor16 %reg, %imm, %reg", rs, immext11+simm2, rd);
     e_xor16.set_decoder(opext=0x0b, op=0x1A, op2=0x05);
 
     orn16.set_asm("orn16 %reg, \%lo(%exp(lowrrirri)), %reg", rs, simm2, rd);
-    orn16.set_asm("orn16 %reg, %imm, %reg", rd, simm2, rs);
+    orn16.set_asm("orn16 %reg, %imm, %reg", rs, simm2, rd);
     orn16.set_decoder(op=0x1A, op2=0x06);
     e_orn16.set_asm("eorn16 %reg, \%lo(%exp(lowextrrirri)), %reg", rs, immext11+simm2, rd);
     e_orn16.set_asm("eorn16 %reg, %imm, %reg", rs, immext11+simm2, rd);
     e_orn16.set_decoder(opext=0x0b, op=0x1A, op2=0x06);
 
     xnor16.set_asm("xnor16 %reg, \%lo(%exp(lowrrirri)), %reg", rs, simm2, rd);
-    xnor16.set_asm("xnor16 %reg, %imm, %reg", rd, simm2, rs);
+    xnor16.set_asm("xnor16 %reg, %imm, %reg", rs, simm2, rd);
     xnor16.set_decoder(op=0x1A, op2=0x07);
     e_xnor16.set_asm("exnor16 %reg, \%lo(%exp(lowextrrirri)), %reg", rs, immext11+simm2, rd);
     e_xnor16.set_asm("exnor16 %reg, %imm, %reg", rs, immext11+simm2, rd);
