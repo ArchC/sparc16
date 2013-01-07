@@ -127,7 +127,7 @@ ac_modifier_encode(pcrelextcallx)
    * instruction containing a pcrelextcallx relocation, cause
    * the difference computed below must be 4 byte aligned
    */
-  reloc->output = reloc->input - reloc->address;
+  reloc->output = reloc->input - (reloc->address+2);
   check_alignment((int)reloc->output, 4, &reloc->error, "pcrelextcallx");
   reloc->output = (int)reloc->output >> 2;
   check_signed_overflow(reloc->output, 22, &reloc->error, "pcrelextcallx");
@@ -138,7 +138,7 @@ ac_modifier_encode(pcrelextcallx)
 
 ac_modifier_decode(pcrelextcallx)
 {
-  reloc->output = (reloc->input << 2) + reloc->address;
+  reloc->output = (reloc->input << 2) + (reloc->address-2);
 }
 
 ac_modifier_encode(pcrelextbrx)
@@ -149,7 +149,7 @@ ac_modifier_encode(pcrelextbrx)
    * instruction containing a pcrelextbrx relocation, cause
    * the difference computed below must be 4 byte aligned
    */
-  reloc->output = reloc->input - reloc->address;
+  reloc->output = reloc->input - (reloc->address+2);
   check_alignment((int)reloc->output, 4, &reloc->error, "pcrelextbrx");
   reloc->output = (int)reloc->output >> 2;
   check_signed_overflow(reloc->output, 20, &reloc->error, "pcrelextbrx");
@@ -160,13 +160,13 @@ ac_modifier_encode(pcrelextbrx)
 
 ac_modifier_decode(pcrelextbrx)
 {
-  reloc->output = (reloc->input << 2) + reloc->address;
+  reloc->output = (reloc->input << 2) + (reloc->address-2);
 }
 
 ac_modifier_encode(pcrelextii)
 {
   // The address is aligned on 2 byte boundary
-  reloc->output = (int)(reloc->input - reloc->address) >> 1;
+  reloc->output = (int)(reloc->input - (reloc->address+2)) >> 1;
   reloc->Type_EXT_I2.simm8 = reloc->output & 0xff;
   reloc->Type_EXT_I2.immext11 = (reloc->output >> 8) & 0x7ff;
   check_signed_overflow(reloc->output, 19, &reloc->error, "pcrelextii");
@@ -175,13 +175,13 @@ ac_modifier_encode(pcrelextii)
 
 ac_modifier_decode(pcrelextii)
 {
-  reloc->output = (reloc->input << 1) + reloc->address;
+  reloc->output = (reloc->input << 1) + (reloc->address-2);
 }
 
 ac_modifier_encode(pcrelexti)
 {
   // The address is aligned on 2 byte boundary
-  reloc->output = (int)(reloc->input - reloc->address) >> 1;
+  reloc->output = (int)(reloc->input - (reloc->address+2)) >> 1;
   reloc->Type_EXT_I.simm10 = reloc->output & 0x3ff;
   reloc->Type_EXT_I.immext11 = (reloc->output >> 10) & 0x7ff;
   check_signed_overflow(reloc->output, 21, &reloc->error, "pcrelexti");
@@ -190,13 +190,13 @@ ac_modifier_encode(pcrelexti)
 
 ac_modifier_decode(pcrelexti)
 {
-  reloc->output = (reloc->input << 1) + reloc->address;
+  reloc->output = (reloc->input << 1) + (reloc->address-2);
 }
 
 ac_modifier_encode(pcrelexticall)
 {
   // The address is aligned on 2 byte boundary
-  reloc->output = (int)(reloc->input - reloc->address) >> 1;
+  reloc->output = (int)(reloc->input - (reloc->address+2)) >> 1;
   reloc->Type_EXT_I.simm11 = reloc->output & 0x7ff;
   reloc->Type_EXT_I.immext11 = (reloc->output >> 11) & 0x7ff;
   check_signed_overflow(reloc->output, 22, &reloc->error, "pcrelexticall");
@@ -205,7 +205,7 @@ ac_modifier_encode(pcrelexticall)
 
 ac_modifier_decode(pcrelexticall)
 {
-  reloc->output = (reloc->input << 1) + reloc->address;
+  reloc->output = (reloc->input << 1) + (reloc->address-2);
 }
 
 /*
