@@ -344,17 +344,17 @@ AC_ISA(sparc16){
     e_sparc16bx.set_asm("esparc16bx %exp(pcrelextbrx)", immext11+simm9);
     e_sparc16bx.set_decoder(opext=0x0b, op=0x1e, op3=0x1);
 
-    bn16.set_asm("bn16%[anul] %exp(pcreli)", an, simm8);
+    bn16.set_asm("bn16%[anul] %exp(pcrelii)", an, simm8);
     bn16.set_decoder(op=0x1c, cond=0x0);
     e_bn16.set_asm("ebn16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bn16.set_decoder(opext=0x0b, op=0x1c, cond=0x0);
 
-    bg16.set_asm("bg16%[anul] %exp(pcreli)", an, simm8);
+    bg16.set_asm("bg16%[anul] %exp(pcrelii)", an, simm8);
     bg16.set_decoder(op=0x1e, cond=0x2);
     e_bg16.set_asm("ebg16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_bg16.set_decoder(opext=0x0b, op=0x1e, cond=0x2);
 
-    ble16.set_asm("ble16%[anul] %exp(pcreli)", an, simm8);
+    ble16.set_asm("ble16%[anul] %exp(pcrelii)", an, simm8);
     ble16.set_decoder(op=0x1c, cond=0x2);
     e_ble16.set_asm("eble16%[anul] %exp(pcrelextii)", an, immext11+simm8);
     e_ble16.set_decoder(opext=0x0b, op=0x1c, cond=0x2);

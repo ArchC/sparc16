@@ -306,6 +306,14 @@ ac_modifier_decode(lowextrri)
   reloc->output = (int)(hi | low);
 }
 
+///
+/// NOTE: there are no "ldst" versions for non-extended
+/// load/stores, because those aren't never used with
+/// relocation by the compiler (only during link-time
+/// it is possible to solve the targets, only use the
+/// larger immediate then...)
+///
+
 ac_modifier_encode(ldstlowextrri)
 {
   // The total imm is 13 bits, but relocation uses 10.
